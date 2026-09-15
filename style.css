@@ -1,41 +1,76 @@
-html {
-  height: 100%;
-  background: 50% 50% no-repeat
-    url('data:image/svg+xml,<svg viewBox="-20 -5 60 40" width="140" xmlns="http://www.w3.org/2000/svg" opacity="0.2"><path d="M1 8l11-7 11 7v8l-11 7-11-7zm0 0l11 8 11-8m0 8L12 8 1 16M12 1v7m0 8v7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><text x="-12" y="32" font-size="5" font-family="monospace" fill="currentColor">Built on CodePen</text></svg>');
+/* RESPONSIVE DESIGN */
+
+* {
+  box-sizing: border-box;
 }
 
-/* MOBILE MENU */
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
 
-@media (max-width: 600px) {
-  .nav {
-    width: 100%;
-    padding: 0 15px;
-  }
+body {
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
 
-  .mobile-menu {
-    display: block !important;
-  }
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* HEADER */
+
+.nav {
+  width: 100%;
+  max-width: 1250px;
+  height: 72px;
+  margin: auto;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.online {
+  flex-shrink: 0;
 }
 
 .mobile-menu {
+  display: none;
   flex-shrink: 0;
-  position: static;
 }
 
 .menu-btn {
-  border: 0;
-  background: none;
-  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  background: transparent;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 0;
-  background: transparent;
-  cursor: pointer;
 }
+
+.menu-btn i {
+  font-size: 28px;
+  color: #073b6b;
+}
+
+/* SIDE MENU */
 
 .side-menu {
   position: fixed;
@@ -64,7 +99,7 @@ html {
 
 .close-btn {
   border: none;
-  background: none;
+  background: transparent;
   font-size: 32px;
   cursor: pointer;
 }
@@ -82,10 +117,6 @@ html {
   font-size: 15px;
 }
 
-.side-menu-links a:hover {
-  background: #f5f7fa;
-}
-
 .menu-overlay {
   position: fixed;
   inset: 0;
@@ -101,138 +132,11 @@ html {
   visibility: visible;
 }
 
-/* SHOW MENU BUTTON ON SMALL SCREENS */
-
-@media (max-width: 600px) {
-  .mobile-menu {
-    display: block;
-  }
-
-  .side-menu {
-    width: 50%;
-    right: -50%;
-  }
-}
-
-/* RESPONSIVE DESIGN */
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  width: 100%;
-  overflow-x: hidden;
-}
-
-body {
-  width: 100%;
-  margin: 0;
-  overflow-x: hidden;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* HEADER */
-
-.nav {
-  width: 100%;
-  max-width: 1250px;
-  margin: auto;
-  padding: 0 25px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.logo {
-  flex-shrink: 0;
-}
-
-.menu {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.online {
-  flex-shrink: 0;
-}
-
-/* HERO */
-
-.hero-inner {
-  width: 100%;
-  max-width: 1250px;
-  margin: auto;
-  padding: 60px 25px;
-  display: flex;
-  gap: 50px;
-  align-items: center;
-}
-
-.hero-text,
-.login {
-  flex: 1;
-  min-width: 0;
-}
-
-/* CARDS */
-
-.cards {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-}
-
-/* QUICK LINKS */
-
-.quick-inner {
-  width: 100%;
-  max-width: 1250px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-/* FOOTER */
-
-.footer-grid {
-  width: 100%;
-  max-width: 1250px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-}
-
 /* DESKTOP */
 
 @media (min-width: 901px) {
-
-  .nav {
-    max-width: 1250px;
-    height: 72px;
-    padding: 0 25px;
-  }
-
-  .logo {
-    font-size: 27px;
-  }
-
-  .logo img {
-    width: 35px;
-  }
-
   .menu {
     display: flex;
-    gap: 30px;
-    font-size: 15px;
   }
 
   .online {
@@ -242,41 +146,14 @@ img {
   .mobile-menu {
     display: none;
   }
-
-  .hero-inner {
-    max-width: 1250px;
-    padding: 70px 25px;
-    flex-direction: row;
-  }
-
-  .hero-text h1 {
-    font-size: 52px;
-  }
-
-  .cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .quick-inner {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .footer-grid {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 /* TABLET */
 
 @media (max-width: 900px) {
-
   .menu {
     gap: 12px;
     font-size: 14px;
-  }
-
-  .hero-inner {
-    gap: 25px;
   }
 
   .cards {
@@ -295,10 +172,9 @@ img {
 /* PHONE */
 
 @media (max-width: 600px) {
-
   .nav {
-    height: auto;
     min-height: 70px;
+    height: auto;
     padding: 12px 15px;
     gap: 10px;
   }
@@ -323,13 +199,11 @@ img {
 
   .mobile-menu {
     display: block;
-    flex-shrink: 0;
   }
 
   .hero-inner {
     padding: 40px 15px;
     flex-direction: column;
-    align-items: stretch;
   }
 
   .hero-text h1 {
@@ -354,12 +228,15 @@ img {
     padding: 0 15px;
   }
 
+  .side-menu {
+    width: 50%;
+    right: -50%;
+  }
 }
 
 /* SMALL PHONES */
 
 @media (max-width: 380px) {
-
   .logo {
     font-size: 17px;
   }
@@ -384,5 +261,4 @@ img {
   .footer-grid {
     grid-template-columns: 1fr;
   }
-
 }
