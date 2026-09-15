@@ -51,6 +51,7 @@ img {
 .mobile-menu {
   display: none;
   flex-shrink: 0;
+  margin right: 15px;
 }
 
 .menu-btn {
