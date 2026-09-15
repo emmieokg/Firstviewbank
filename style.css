@@ -18,7 +18,6 @@ html {
 }
 
 .mobile-menu {
-  display: block;
   flex-shrink: 0;
   position: static;
 }
