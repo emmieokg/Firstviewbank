@@ -20,9 +20,7 @@ html {
 .mobile-menu {
   display: block;
   flex-shrink: 0;
-  position: relative;
-  right: 0;
-  margin-left: 0;
+  position: static;
 }
 
 .menu-btn {
