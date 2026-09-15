@@ -62,12 +62,12 @@ header {
   max-width: 850px;
   min-height: 65px;
   margin: auto;
-  padding: 0 25px;
+  padding: 0 15px;
 
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 10px;
 }
 
 
