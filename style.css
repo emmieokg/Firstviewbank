@@ -4,6 +4,97 @@ html {
     url('data:image/svg+xml,<svg viewBox="-20 -5 60 40" width="140" xmlns="http://www.w3.org/2000/svg" opacity="0.2"><path d="M1 8l11-7 11 7v8l-11 7-11-7zm0 0l11 8 11-8m0 8L12 8 1 16M12 1v7m0 8v7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><text x="-12" y="32" font-size="5" font-family="monospace" fill="currentColor">Built on CodePen</text></svg>');
 }
 
+/* MOBILE MENU */
+
+.mobile-menu {
+  display: none;
+}
+
+.menu-btn {
+  border: none;
+  background: none;
+  font-size: 28px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: -50%;
+  width: 50%;
+  height: 100vh;
+  background: #fff;
+  z-index: 1000;
+  box-shadow: -5px 0 20px rgba(0,0,0,0.15);
+  transition: right 0.3s ease;
+}
+
+.side-menu.open {
+  right: 0;
+}
+
+.side-menu-header {
+  height: 72px;
+  padding: 0 20px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.side-menu-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-menu-links a {
+  padding: 18px 20px;
+  color: #073b6b;
+  text-decoration: none;
+  border-bottom: 1px solid #eee;
+  font-size: 15px;
+}
+
+.side-menu-links a:hover {
+  background: #f5f7fa;
+}
+
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* SHOW MENU BUTTON ON SMALL SCREENS */
+
+@media (max-width: 600px) {
+  .mobile-menu {
+    display: block;
+  }
+
+  .side-menu {
+    width: 50%;
+    right: -50%;
+  }
+}
+
 /* RESPONSIVE DESIGN */
 
 * {
