@@ -2,6 +2,10 @@
   transform: translateX(-25px);
 }
 
+.logo span {
+  transform: translateX(-20px);
+}
+
 .menu {
   transform: translateX(80px);
 }
