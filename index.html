@@ -1,300 +1,458 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Firstviewbank | Personal Banking</title>
 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Firstviewbank | Personal Banking</title>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
 </head>
 
 <body>
 
-<div class="top">
-  <span>Personal</span>
-  <span>Small Business</span>
-  <span>Wealth</span>
-  <span>Help & Support</span>
-</div>
+  <!-- ================================
+       TOP BAR
+  ================================= -->
 
-<header>
-  <div class="nav">
+  <div class="top">
+    <span>Personal</span>
+    <span>Small Business</span>
+    <span>Wealth</span>
+    <span>Help &amp; Support</span>
+  </div>
 
-  <div class="logo">
-  <img src="logo.png" alt="Firstviewbank">
-  <span>Firstviewbank</span>
-</div>
 
-    <nav class="menu">
-      <a href="#">Accounts</a>
-      <a href="#">Credit Cards</a>
-      <a href="#">Loans</a>
-      <a href="#">Mortgage</a>
-      <a href="#">Investing</a>
+  <!-- ================================
+       HEADER
+  ================================= -->
+
+  <header>
+    <div class="nav">
+
+      <!-- Logo -->
+      <div class="logo">
+        <img src="logo.png" alt="Firstviewbank logo">
+        <span>Firstviewbank</span>
+      </div>
+
+
+      <!-- Desktop Navigation -->
+      <nav class="menu" aria-label="Main navigation">
+        <a href="#">Accounts</a>
+        <a href="#">Credit Cards</a>
+        <a href="#">Loans</a>
+        <a href="#">Mortgage</a>
+        <a href="#">Investing</a>
+      </nav>
+
+
+      <!-- Create Account -->
+      <button type="button" class="online">
+        Create Account
+      </button>
+
+
+      <!-- Mobile Menu Button -->
+      <div class="mobile-menu">
+        <button
+          type="button"
+          class="menu-btn"
+          onclick="toggleMenu()"
+          aria-label="Open menu"
+          aria-controls="sideMenu"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ================================
+       MOBILE SIDE MENU
+  ================================= -->
+
+  <aside class="side-menu" id="sideMenu" aria-label="Mobile navigation">
+
+    <div class="side-menu-header">
+      <strong>Menu</strong>
+
+      <button
+        type="button"
+        class="close-btn"
+        onclick="toggleMenu()"
+        aria-label="Close menu"
+      >
+        &times;
+      </button>
+    </div>
+
+    <nav class="side-menu-links" aria-label="Mobile navigation links">
+      <a href="#">Sign In</a>
+      <a href="#">Business</a>
+      <a href="#">Wealth Management</a>
+      <a href="#">Privacy &amp; Security</a>
+      <a href="#">About Us</a>
+      <a href="#">Contact Us</a>
+      <a href="#">Help</a>
     </nav>
 
-    <button class="online">Create Account</button>
+  </aside>
 
-    <div class="mobile-menu">
-    <button class="menu-btn" onclick="toggleMenu()">
-    <i class="fa-solid fa-bars"></i>
-  </button>
-</div>
+  <!-- Menu Overlay -->
+  <div
+    class="menu-overlay"
+    id="menuOverlay"
+    onclick="toggleMenu()"
+  ></div>
 
-  </div>
-</header>
 
-<div class="side-menu" id="sideMenu">
+  <!-- ================================
+       HERO
+  ================================= -->
 
-  <div class="side-menu-header">
-    <strong>Menu</strong>
-    <button class="close-btn" onclick="toggleMenu()">×</button>
-  </div>
+  <main>
 
-  <nav class="side-menu-links">
-    <a href="#">Sign In</a>
-    <a href="#">Business</a>
-    <a href="#">Wealth Management</a>
-    <a href="#">Privacy &amp; Security</a>
-    <a href="#">About Us</a>
-    <a href="#">Contact Us</a>
-    <a href="#">Help</a>
-  </nav>
+    <section class="hero">
 
-</div>
+      <div class="hero-inner">
 
-<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+        <div class="hero-text">
 
-<section class="hero">
+          <h1>Banking built around your life.</h1>
 
-  <div class="hero-inner">
+          <p>
+            Manage your money, build your savings and plan for tomorrow
+            with Firstviewbank.
+          </p>
 
-    <div class="hero-text">
-      <h1>Banking built around your life.</h1>
+          <a href="#" class="red-btn">
+            Explore Our Accounts
+          </a>
 
-      <p>
-        Manage your money, build your savings and plan for tomorrow
-        with Firstviewbank.
-      </p>
+        </div>
 
-      <a href="#" class="red-btn">Explore Our Accounts</a>
-    </div>
 
-    <div class="login">
+        <!-- Demo Login -->
 
-      <h2>Online Banking</h2>
+        <div class="login">
 
-      <div class="demo">
-        Demo interface — no information is submitted.
+          <h2>Online Banking</h2>
+
+          <div class="demo">
+            Demo interface — no information is submitted.
+          </div>
+
+          <label for="userId">User ID</label>
+
+          <input
+            type="text"
+            id="userId"
+            name="userId"
+            placeholder="Enter User ID"
+            autocomplete="off"
+          >
+
+          <label for="password">Password</label>
+
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter Password"
+            autocomplete="off"
+          >
+
+          <button type="button" onclick="demoLogin()">
+            Sign In
+          </button>
+
+          <div class="links">
+            <a href="#">Forgot ID?</a>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+        </div>
+
       </div>
 
-      <label>User ID</label>
-      <input type="text" placeholder="Enter User ID">
+    </section>
 
-      <label>Password</label>
-      <input type="password" placeholder="Enter Password">
 
-      <button onclick="demoLogin()">Sign In</button>
+    <!-- ================================
+         QUICK LINKS
+    ================================= -->
 
-      <div class="links">
-        <a href="#">Forgot ID?</a>
-        <a href="#">Forgot Password?</a>
+    <section class="quick">
+
+      <div class="quick-inner">
+
+        <div class="quick-item">
+          <strong>Checking</strong>
+          <span>Everyday banking</span>
+        </div>
+
+        <div class="quick-item">
+          <strong>Savings</strong>
+          <span>Grow your money</span>
+        </div>
+
+        <div class="quick-item">
+          <strong>Credit Cards</strong>
+          <span>Find your card</span>
+        </div>
+
+        <div class="quick-item">
+          <strong>Home Loans</strong>
+          <span>Finance your home</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         PRODUCTS
+    ================================= -->
+
+    <section class="products">
+
+      <h2>Explore Firstviewbank</h2>
+
+      <div class="cards">
+
+        <div class="card">
+          <div class="card-icon">🏦</div>
+
+          <h3>Checking Accounts</h3>
+
+          <p>
+            Convenient everyday banking with easy access to your money.
+          </p>
+
+          <a href="#">Learn more →</a>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">💰</div>
+
+          <h3>Savings Accounts</h3>
+
+          <p>
+            Put your money to work and make progress toward your goals.
+          </p>
+
+          <a href="#">Learn more →</a>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">💳</div>
+
+          <h3>Credit Cards</h3>
+
+          <p>
+            Explore flexible card options designed for different needs.
+          </p>
+
+          <a href="#">View cards →</a>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">🏠</div>
+
+          <h3>Mortgages</h3>
+
+          <p>
+            Explore home financing options and resources.
+          </p>
+
+          <a href="#">Learn more →</a>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">🚗</div>
+
+          <h3>Auto Loans</h3>
+
+          <p>
+            Financing solutions to help you purchase your next vehicle.
+          </p>
+
+          <a href="#">Learn more →</a>
+        </div>
+
+
+        <div class="card">
+          <div class="card-icon">📈</div>
+
+          <h3>Investing</h3>
+
+          <p>
+            Resources to help you understand investing and plan ahead.
+          </p>
+
+          <a href="#">Explore investing →</a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         PROMO
+    ================================= -->
+
+    <section class="promo">
+
+      <div class="promo-inner">
+
+        <div class="promo-image"></div>
+
+        <div class="promo-text">
+
+          <h2>Your financial future starts here.</h2>
+
+          <p>
+            Whether you're saving for a major purchase, buying a home,
+            or planning for retirement, Firstviewbank provides tools
+            and resources to help you move forward.
+          </p>
+
+          <a href="#" class="white-btn">
+            Get Started
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================================
+         SECURITY
+    ================================= -->
+
+    <section class="security">
+
+      <h2>Your security matters</h2>
+
+      <p>
+        Firstviewbank is committed to helping customers protect their
+        financial information with secure digital banking tools and
+        account protection resources.
+      </p>
+
+    </section>
+
+  </main>
+
+
+  <!-- ================================
+       FOOTER
+  ================================= -->
+
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+        <div class="footer-logo">
+          Firstviewbank
+        </div>
+
+        <p>
+          Banking made simple. Banking built around you.
+        </p>
+      </div>
+
+
+      <div>
+        <h4>Banking</h4>
+
+        <a href="#">Checking</a>
+        <a href="#">Savings</a>
+        <a href="#">Credit Cards</a>
+        <a href="#">Loans</a>
+      </div>
+
+
+      <div>
+        <h4>Resources</h4>
+
+        <a href="#">Financial Education</a>
+        <a href="#">Security Center</a>
+        <a href="#">Help Center</a>
+        <a href="#">Contact</a>
+      </div>
+
+
+      <div>
+        <h4>Company</h4>
+
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
       </div>
 
     </div>
 
-  </div>
 
-</section>
-
-<section class="quick">
-
-  <div class="quick-inner">
-
-    <div class="quick-item">
-      <strong>Checking</strong>
-      <span>Everyday banking</span>
+    <div class="copyright">
+      © 2026 Firstviewbank. All rights reserved.
     </div>
 
-    <div class="quick-item">
-      <strong>Savings</strong>
-      <span>Grow your money</span>
-    </div>
+  </footer>
 
-    <div class="quick-item">
-      <strong>Credit Cards</strong>
-      <span>Find your card</span>
-    </div>
 
-    <div class="quick-item">
-      <strong>Home Loans</strong>
-      <span>Finance your home</span>
-    </div>
+  <!-- ================================
+       JAVASCRIPT
+  ================================= -->
 
-  </div>
+  <script>
 
-</section>
+    function demoLogin() {
+      alert(
+        "This is a demonstration interface. " +
+        "No login information has been submitted."
+      );
+    }
 
-<section class="products">
 
-  <h2>Explore Firstviewbank</h2>
+    function toggleMenu() {
 
-  <div class="cards">
+      const menu = document.getElementById("sideMenu");
+      const overlay = document.getElementById("menuOverlay");
+      const menuButton = document.querySelector(".menu-btn");
 
-    <div class="card">
-      <div class="card-icon">🏦</div>
-      <h3>Checking Accounts</h3>
-      <p>
-        Convenient everyday banking with easy access to your money.
-      </p>
-      <a href="#">Learn more →</a>
-    </div>
+      const isOpen = menu.classList.toggle("open");
 
-    <div class="card">
-      <div class="card-icon">💰</div>
-      <h3>Savings Accounts</h3>
-      <p>
-        Put your money to work and make progress toward your goals.
-      </p>
-      <a href="#">Learn more →</a>
-    </div>
+      overlay.classList.toggle("open");
 
-    <div class="card">
-      <div class="card-icon">💳</div>
-      <h3>Credit Cards</h3>
-      <p>
-        Explore flexible card options designed for different needs.
-      </p>
-      <a href="#">View cards →</a>
-    </div>
+      if (menuButton) {
+        menuButton.setAttribute("aria-expanded", isOpen);
+      }
+    }
 
-    <div class="card">
-      <div class="card-icon">🏠</div>
-      <h3>Mortgages</h3>
-      <p>
-        Explore home financing options and resources.
-      </p>
-      <a href="#">Learn more →</a>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">🚗</div>
-      <h3>Auto Loans</h3>
-      <p>
-        Financing solutions to help you purchase your next vehicle.
-      </p>
-      <a href="#">Learn more →</a>
-    </div>
-
-    <div class="card">
-      <div class="card-icon">📈</div>
-      <h3>Investing</h3>
-      <p>
-        Resources to help you understand investing and plan ahead.
-      </p>
-      <a href="#">Explore investing →</a>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="promo">
-
-  <div class="promo-inner">
-
-    <div class="promo-image"></div>
-
-    <div class="promo-text">
-      <h2>Your financial future starts here.</h2>
-
-      <p>
-        Whether you're saving for a major purchase, buying a home,
-        or planning for retirement, Firstviewbank provides tools
-        and resources to help you move forward.
-      </p>
-
-      <a href="#" class="white-btn">Get Started</a>
-    </div>
-
-  </div>
-
-</section>
-
-<section class="security">
-
-  <h2>Your security matters</h2>
-
-  <p>
-    Firstviewbank is committed to helping customers protect their
-    financial information with secure digital banking tools and
-    account protection resources.
-  </p>
-
-</section>
-
-<footer>
-
-  <div class="footer-grid">
-
-    <div>
-      <div class="footer-logo">Firstviewbank</div>
-      <p>
-        Banking made simple. Banking built around you.
-      </p>
-    </div>
-
-    <div>
-      <h4>Banking</h4>
-      <a href="#">Checking</a>
-      <a href="#">Savings</a>
-      <a href="#">Credit Cards</a>
-      <a href="#">Loans</a>
-    </div>
-
-    <div>
-      <h4>Resources</h4>
-      <a href="#">Financial Education</a>
-      <a href="#">Security Center</a>
-      <a href="#">Help Center</a>
-      <a href="#">Contact</a>
-    </div>
-
-    <div>
-      <h4>Company</h4>
-      <a href="#">About Us</a>
-      <a href="#">Careers</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-    </div>
-
-  </div>
-
-  <div class="copyright">
-    © 2026 Firstviewbank. All rights reserved.
-  </div>
-
-</footer>
-
-<script>
-function demoLogin(){
-  alert(
-    "This is a demonstration interface. " +
-    "No login information has been submitted."
-  );
-}
-</script>
-
-<script>
-function toggleMenu() {
-  const menu = document.getElementById("sideMenu");
-  const overlay = document.getElementById("menuOverlay");
-
-  menu.classList.toggle("open");
-  overlay.classList.toggle("open");
-}
-</script>
+  </script>
 
 </body>
 </html>
