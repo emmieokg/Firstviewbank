@@ -59,15 +59,14 @@ header {
 
 .nav {
   width: 100%;
-  max-width: 850px;
-  min-height: 65px;
+  max-width: 1250px;
+  min-height: 85px;
   margin: auto;
-  padding: 0 15px;
-
+  padding: 0 25px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 20px;
 }
 
 
