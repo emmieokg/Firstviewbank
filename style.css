@@ -1,3 +1,18 @@
+.logo {
+  transform: translateX(-20px);
+}
+
+.menu {
+  transform: translateX(10px);
+}
+
+.online {
+  transform: translateX(-10px);
+}
+
+.mobile-menu {
+  transform: translateX(-20px);
+}
 /* RESPONSIVE DESIGN */
 
 * {
