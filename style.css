@@ -3,3 +3,221 @@ html {
   background: 50% 50% no-repeat
     url('data:image/svg+xml,<svg viewBox="-20 -5 60 40" width="140" xmlns="http://www.w3.org/2000/svg" opacity="0.2"><path d="M1 8l11-7 11 7v8l-11 7-11-7zm0 0l11 8 11-8m0 8L12 8 1 16M12 1v7m0 8v7" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="2"/><text x="-12" y="32" font-size="5" font-family="monospace" fill="currentColor">Built on CodePen</text></svg>');
 }
+
+/* RESPONSIVE DESIGN */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* HEADER */
+
+.nav {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.online {
+  flex-shrink: 0;
+}
+
+/* HERO */
+
+.hero-inner {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+  padding: 60px 25px;
+  display: flex;
+  gap: 50px;
+  align-items: center;
+}
+
+.hero-text,
+.login {
+  flex: 1;
+  min-width: 0;
+}
+
+/* CARDS */
+
+.cards {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+/* QUICK LINKS */
+
+.quick-inner {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* FOOTER */
+
+.footer-grid {
+  width: 100%;
+  max-width: 1250px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .menu {
+    gap: 12px;
+    font-size: 14px;
+  }
+
+  .hero-inner {
+    gap: 25px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* PHONE */
+
+@media (max-width: 600px) {
+
+  .nav {
+    height: auto;
+    min-height: 70px;
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  .logo img {
+    width: 30px;
+  }
+
+  .logo {
+    font-size: 20px;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .online {
+    margin-left: auto;
+    font-size: 13px;
+    padding: 10px 12px;
+  }
+
+  .mobile-menu {
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .hero-inner {
+    padding: 40px 15px;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-text h1 {
+    font-size: 34px;
+  }
+
+  .login {
+    width: 100%;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .quick-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 0 15px;
+  }
+
+}
+
+/* SMALL PHONES */
+
+@media (max-width: 380px) {
+
+  .logo {
+    font-size: 17px;
+  }
+
+  .logo img {
+    width: 26px;
+  }
+
+  .online {
+    font-size: 11px;
+    padding: 8px 9px;
+  }
+
+  .hero-text h1 {
+    font-size: 28px;
+  }
+
+  .quick-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
