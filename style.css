@@ -86,7 +86,8 @@ header {
   flex-shrink: 0;
 
   /* Move entire logo */
-  transform: translateX(-20px);
+  positive: relative;
+  left: -25px;
 }
 
 .logo img {
@@ -101,8 +102,9 @@ header {
   color: #073b6b;
   font-family: "Trajan Pro", serif;
 
-  /* Move only Firstviewbank text */
-  transform: translateX(-20px);
+  /* Move only Firstviewbank */
+  position: relative;
+  left: -10px;
 }
 
 
@@ -114,7 +116,8 @@ header {
   gap: 20px;
 
   /* Allows you to move the nav links */
-  transform: translateX(20px);
+  postion: relative
+  left: 20px;
 
   /* Pushes menu toward the right */
   margin-left: auto;
@@ -139,7 +142,8 @@ header {
   flex-shrink: 0;
 
   /* Move button */
-  transform: translateX(20px);
+  position: relative;
+  left: 20px;
 }
 
 
