@@ -5,6 +5,14 @@ html {
 }
 
 .logo-img {
-  width: 180px;
+  width: 140px;
   height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .logo-img {
+    width: 120px;
+  }
 }
