@@ -5,11 +5,24 @@ html {
 }
 
 .logo-img {
-  width: 140px;
-  height: auto;
-  max-width: 100%;
-  display: block;
-}
+
+  position: static !important;
+
+  width: 140px !important;
+
+  height: auto !important;
+
+  max-width: 140px !important;
+
+  margin: 0 !important;
+
+  padding: 0 !important;
+
+  display: block !important;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
 
 @media (max-width: 768px) {
   .logo-img {
