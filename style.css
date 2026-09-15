@@ -91,8 +91,8 @@ header {
 }
 
 .logo img {
-  width: 100px;
-  height: 100px;
+  width: 85px;
+  height: 85px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
