@@ -7,11 +7,11 @@
 }
 
 .online {
-  transform: translateX(10px);
+  transform: translateX(15px);
 }
 
 .mobile-menu {
-  transform: translateX(8px);
+  transform: translateX(6px);
 }
 /* RESPONSIVE DESIGN */
 
