@@ -101,6 +101,61 @@ img {
   gap: 30px;
 }
 
+/* DESKTOP */
+
+@media (min-width: 901px) {
+
+  .nav {
+    max-width: 1250px;
+    height: 72px;
+    padding: 0 25px;
+  }
+
+  .logo {
+    font-size: 27px;
+  }
+
+  .logo img {
+    width: 35px;
+  }
+
+  .menu {
+    display: flex;
+    gap: 30px;
+    font-size: 15px;
+  }
+
+  .online {
+    display: block;
+  }
+
+  .mobile-menu {
+    display: none;
+  }
+
+  .hero-inner {
+    max-width: 1250px;
+    padding: 70px 25px;
+    flex-direction: row;
+  }
+
+  .hero-text h1 {
+    font-size: 52px;
+  }
+
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .quick-inner {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 /* TABLET */
 
 @media (max-width: 900px) {
