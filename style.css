@@ -90,8 +90,8 @@ header {
 }
 
 .logo img {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -144,7 +144,7 @@ header {
 
   /* Move button */
   position: relative;
-  left: 25px;
+  left: 10px;
 }
 
 
