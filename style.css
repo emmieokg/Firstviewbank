@@ -138,6 +138,9 @@ img {
 @media (min-width: 901px) {
   .menu {
     display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
   }
 
   .online {
