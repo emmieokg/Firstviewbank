@@ -1,13 +1,13 @@
 .logo {
-  transform: translateX(-15px);
+  margin-left: -20px;
 }
 
 .online {
-  transform: translateX(20px);
+  margin-left: -10px;
 }
 
 .mobile-menu {
-  transform: translateX(15px);
+  margin-left: -20px;
 }
 
 /* RESPONSIVE DESIGN */
