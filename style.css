@@ -16,27 +16,20 @@ html {
   justify-content: space-between;
   gap: 25px;
   box-sizing: border-box;
-{
+}
 
 .logo-img {
 
   position: static !important;
-
   width: 140px !important;
-
   height: auto !important;
-
   max-width: 140px !important;
-
   margin: 0 !important;
-
   padding: 0 !important;
-
   display: block !important;
-
   object-fit: contain;
-
   flex-shrink: 0;
+}
 
 @media (max-width: 768px) {
   .logo-img {
@@ -47,18 +40,6 @@ html {
 .brand {
 
   display: flex;
-
   align-items: center;
-
   flex-shrink: 0;
-  
-  .nav {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 15px 20px;
-  box-sizing: border-box;
 }
