@@ -6,6 +6,17 @@ html {
 
 /* MOBILE MENU */
 
+@media (max-width: 600px) {
+  .nav {
+    width: 100%;
+    padding: 0 15px;
+  }
+
+  .mobile-menu {
+    display: block !important;
+  }
+}
+
 .mobile-menu {
   display: block;
   flex-shrink: 0;
