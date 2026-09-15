@@ -11,11 +11,11 @@
 }
 
 .online {
-  transform: translateX(15px);
+  transform: translateX(20px);
 }
 
 .mobile-menu {
-  transform: translateX(8px);
+  transform: translateX(15px);
 }
 /* RESPONSIVE DESIGN */
 
