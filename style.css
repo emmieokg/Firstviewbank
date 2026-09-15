@@ -78,7 +78,7 @@ header {
   align-items: center;
   gap: 8px;
 
-  font-size: 40px;
+  font-size: 30px;
   font-weight: bold;
   color: #073b6b;
 
@@ -91,8 +91,8 @@ header {
 }
 
 .logo img {
-  width: 110px;
-  height: 110px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -699,8 +699,8 @@ footer p {
   }
 
   .logo img {
-    width: 60px;
-    height: 60px;
+    width: 100px;
+    height: 100px;
   }
 
   .menu {
@@ -764,8 +764,8 @@ footer p {
   }
 
   .logo img {
-    width: 55px;
-    height: 55px;
+    width: 100px;
+    height: 100px;
   }
 
 
@@ -848,8 +848,8 @@ footer p {
   }
 
   .logo img {
-    width: 48px;
-    height: 48px;
+    width: 60px;
+    height: 60px;
   }
 
   .online {
