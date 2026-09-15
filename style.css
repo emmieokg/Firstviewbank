@@ -3,11 +3,11 @@
 }
 
 .logo span {
-  transform: translateX(-25px);
+  transform: translateX(-20px);
 }
 
 .menu {
-  transform: translateX(10px);
+  transform: translateX(20px);
 }
 
 .online {
@@ -15,7 +15,7 @@
 }
 
 .mobile-menu {
-  transform: translateX(10px);
+  transform: translateX(8px);
 }
 /* RESPONSIVE DESIGN */
 
