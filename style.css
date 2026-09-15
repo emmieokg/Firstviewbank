@@ -86,7 +86,7 @@ header {
   flex-shrink: 0;
 
   /* Move entire logo */
-  transform: translateX(-25px);
+  transform: translateX(-20px);
 }
 
 .logo img {
