@@ -86,7 +86,7 @@ header {
   flex-shrink: 0;
 
   /* Move entire logo */
-  transform: translateX(-30px);
+  transform: translateX(-10px);
 }
 
 .logo img {
@@ -140,7 +140,7 @@ header {
   flex-shrink: 0;
 
   /* Move button */
-  transform: translateX(-3px);
+  transform: translateX(-30px);
 }
 
 
@@ -151,7 +151,7 @@ header {
   flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(-30px);
+  transform: translateX(-35px);
 }
 
 .menu-btn {
