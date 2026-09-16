@@ -712,18 +712,18 @@ footer p {
    MOBILE
 ================================ */
 
-@media (max-width: 850px) {
+@media (max-width: 500px) {
 
   .top {
     display: none;
   }
 
   .nav {
-    min-height: 85px;
+    min-height: 75px;
 
-    padding: 0 15px;
+    padding: 0 10px;
 
-    gap: 10px;
+    gap: 8px;
   }
 
   /* Hide desktop navigation */
@@ -741,7 +741,7 @@ footer p {
   }
 
   .online {
-    padding: 10px 14px;
+    padding: 9px 10px;
 
     font-size: 12px;
 
@@ -749,7 +749,7 @@ footer p {
   }
 
   .logo {
-    font-size: 24px;
+    font-size: 20px;
 
     transform: translateX(0);
   }
