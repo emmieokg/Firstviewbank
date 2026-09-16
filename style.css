@@ -140,7 +140,7 @@ header {
 
   /* Move button */
   position: relative;
-  left: -10px;
+  left: -20px;
 }
 
 
@@ -151,7 +151,7 @@ header {
   flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(-15px);
+  transform: translateX(-30px);
 }
 
 .menu-btn {
