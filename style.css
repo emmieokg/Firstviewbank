@@ -149,7 +149,6 @@ header {
 .mobile-menu {
   display: block;
   margin-left: auto;
-  flex-shrink: 0;
 
   /* Move hamburger */
   transform: translateX(0);
@@ -683,31 +682,66 @@ footer p {
    TABLET
 ================================ */
 
-@media (max-width: 1000px) {
+
 
   .nav {
+
     padding: 0 18px;
+
     gap: 12px;
+
+    min-height: 120px;
+
   }
 
   .logo {
+
     font-size: 30px;
+
   }
 
   .logo img {
+
     width: 100px;
+
     height: 100px;
+
+    max-width: none;
+
   }
 
+  /* Hide desktop navigation */
+
   .menu {
-    gap: 12px;
+
+    display: none;
+
+  }
+
+  /* SHOW HAMBURGER */
+
+  .mobile-menu {
+    display: block;
+    margin-left: auto;
+    flex-shrink: 0;
+    transform: translateX(0);
+  }
+
+  .menu-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menu-btn i {
+    font-size: 28px;
+    color: #073b6b;
   }
 
   .hero-inner {
     gap: 30px;
   }
-}
 
+}
 
 /* ================================
    MOBILE
@@ -721,9 +755,7 @@ footer p {
 
   .nav {
     min-height: 75px;
-
     padding: 0 10px;
-
     gap: 8px;
   }
 
@@ -735,9 +767,7 @@ footer p {
   /* Show hamburger */
   .mobile-menu {
     display: block;
-
     margin-left: auto;
-
     transform: translateX(0);
   }
 
