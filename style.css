@@ -92,7 +92,7 @@ header {
   flex-shrink: 0;
   position: relative;
   left: -10px;
-  max-width: none
+  max-width: none;
 }
 
 .logo span {
@@ -147,11 +147,12 @@ header {
 /* MOBILE MENU */
 
 .mobile-menu {
-  display: none;
+  display: block;
+  margin-left: auto;
   flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(-30px);
+  transform: translateX(0);
 }
 
 .menu-btn {
