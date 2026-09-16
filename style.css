@@ -466,21 +466,16 @@ header {
 
 .card {
   background: white;
-
   text-align: left;
-
   border: 1px solid #ddd;
-
   min-height: 220px;
-
   padding: 30px;
-
   transition: 0.2s;
+  overflow: hidden;
 }
 
 .card:hover {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
-
   transform: translateY(-3px);
 }
 
@@ -491,29 +486,23 @@ header {
 
 .card h3 {
   color: #073b6b;
-
   font-size: 21px;
-
   margin-bottom: 12px;
+  overflow-wrap: break-word;
 }
 
 .card p {
   color: #555;
-
   line-height: 1.6;
-
   font-size: 14px;
+  overflow-wrap: break-word;
 }
 
 .card a {
   display: inline-block;
-
   margin-top: 18px;
-
   color: #b51e2c;
-
   font-weight: bold;
-
   font-size: 14px;
 }
 
