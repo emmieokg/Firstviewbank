@@ -744,26 +744,16 @@ footer p {
     display: block;
 
     margin-left: auto;
-
-    transform: translateX(0);
   }
 
   .online {
     padding: 10px 14px;
 
     font-size: 12px;
-
-    transform: translateX(0);
   }
 
   .logo {
     font-size: 24px;
-
-    transform: translateX(0);
-  }
-
-  .logo span {
-    transform: translateX(0);
   }
 
   .logo img {
