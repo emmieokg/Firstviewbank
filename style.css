@@ -60,7 +60,7 @@ header {
 .nav {
   width: 100%;
   max-width: 1250px;
-  min-height: 105px;
+  min-height: 120px;
   margin: auto;
   padding: 0 25px;
   display: flex;
@@ -90,8 +90,8 @@ header {
 }
 
 .logo img {
-  width: 85px;
-  height: 85px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -105,7 +105,7 @@ header {
 
   /* Move only Firstviewbank */
   position: relative;
-  left: -5px;
+  left: -3px;
 }
 
 
@@ -723,7 +723,7 @@ footer p {
   }
 
   .nav {
-    min-height: 105px;
+    min-height: 120px;
 
     padding: 0 15px;
 
@@ -763,8 +763,8 @@ footer p {
   }
 
   .logo img {
-    width: 85px;
-    height: 85px;
+    width: 100px;
+    height: 100px;
   }
 
 
