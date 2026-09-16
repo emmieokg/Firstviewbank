@@ -872,7 +872,35 @@ footer p {
   .footer-grid {
     grid-template-columns: 1fr;
   }
-  .quick-item:nth-child(even) {
-  border-right: 0;
+  
+  /* QUICK LINKS FINAL OVERRIDE */
+
+/* Put this AFTER all media queries */
+
+.quick-inner {
+
+  display: grid !important;
+
+  grid-template-columns: repeat(2, 1fr) !important;
+
+}
+
+.quick-item {
+
+  border-right: 1px solid #ddd !important;
+
+  border-bottom: 1px solid #ddd !important;
+
+}
+
+.quick-item:nth-child(2n) {
+
+  border-right: 0 !important;
+
+}
+
+.quick-item:nth-child(n+3) {
+
+  border-bottom: 0 !important;
 }
 }
