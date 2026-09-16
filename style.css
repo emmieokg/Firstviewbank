@@ -418,8 +418,8 @@ header {
   border-right: 1px solid #ddd;
 }
 
-.quick-item:last-child {
-  border: 0;
+.quick-item:nth-child(even) {
+  border-right: 0;
 }
 
 .quick-item strong {
