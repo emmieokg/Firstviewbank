@@ -151,7 +151,7 @@ header {
   flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(-10px);
+  transform: translateX(-30px);
 }
 
 .menu-btn {
@@ -694,16 +694,14 @@ footer p {
   }
 
   .logo img {
-    width: 48px;
-    height: 48px;
+    width: 100px;
+    height: 100px;
   }
 
   .mobile-menu {
     display: block;
 
     margin-left: auto;
-
-    transform: translateX(0);
   }
 
   .menu {
