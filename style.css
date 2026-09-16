@@ -22,6 +22,11 @@ body {
   background: #fff;
 }
 
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -55,9 +60,10 @@ header {
 .nav {
   width: 100%;
   max-width: 1250px;
-  min-height: 85px;
+  min-height: 72px;
   margin: auto;
   padding: 0 25px;
+
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -72,7 +78,7 @@ header {
   align-items: center;
   gap: 8px;
 
-  font-size: 30px;
+  font-size: 40px;
   font-weight: bold;
   color: #073b6b;
 
@@ -80,8 +86,7 @@ header {
   flex-shrink: 0;
 
   /* Move entire logo */
-  position: relative;
-  left: -13px;
+  transform: translateX(-25px);
 }
 
 .logo img {
@@ -90,18 +95,14 @@ header {
   object-fit: contain;
   display: block;
   flex-shrink: 0;
-  position: relative;
-  left: -10px;
-  max-width: none;
 }
 
 .logo span {
   color: #073b6b;
   font-family: "Trajan Pro", serif;
 
-  /* Move only Firstviewbank */
-  position: relative;
-  left: -30px;
+  /* Move only Firstviewbank text */
+  transform: translateX(-20px);
 }
 
 
@@ -113,8 +114,7 @@ header {
   gap: 20px;
 
   /* Allows you to move the nav links */
-  position: relative;
-  left: -20px;
+  transform: translateX(20px);
 
   /* Pushes menu toward the right */
   margin-left: auto;
@@ -139,19 +139,18 @@ header {
   flex-shrink: 0;
 
   /* Move button */
-  position: relative;
-  left: -40px;
+  transform: translateX(20px);
 }
 
 
 /* MOBILE MENU */
 
 .mobile-menu {
-  display: block;
-  margin-left: auto;
+  display: none;
+  flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(0);
+  transform: translateX(15px);
 }
 
 .menu-btn {
@@ -682,81 +681,56 @@ footer p {
    TABLET
 ================================ */
 
-
+@media (max-width: 1000px) {
 
   .nav {
-
     padding: 0 18px;
-
     gap: 12px;
-
-    min-height: 120px;
-
   }
 
   .logo {
-
     font-size: 30px;
-
   }
 
   .logo img {
-
-    width: 100px;
-
-    height: 100px;
-
-    max-width: none;
-
+    width: 48px;
+    height: 48px;
   }
-
-  /* Hide desktop navigation */
-
-  .menu {
-
-    display: none;
-
-  }
-
-  /* SHOW HAMBURGER */
 
   .mobile-menu {
     display: block;
+
     margin-left: auto;
-    flex-shrink: 0;
+
     transform: translateX(0);
   }
 
-  .menu-btn {
-    width: 40px;
-    height: 40px;
-  }
-
-  .menu-btn i {
-    font-size: 28px;
-    color: #073b6b;
+  .menu {
+    gap: 12px;
   }
 
   .hero-inner {
     gap: 30px;
   }
-
 }
+
 
 /* ================================
    MOBILE
 ================================ */
 
-@media (max-width: 500px) {
+@media (max-width: 850px) {
 
   .top {
     display: none;
   }
 
   .nav {
-    min-height: 75px;
-    padding: 0 10px;
-    gap: 8px;
+    min-height: 65px;
+
+    padding: 0 15px;
+
+    gap: 10px;
   }
 
   /* Hide desktop navigation */
@@ -767,12 +741,14 @@ footer p {
   /* Show hamburger */
   .mobile-menu {
     display: block;
+
     margin-left: auto;
+
     transform: translateX(0);
   }
 
   .online {
-    padding: 9px 10px;
+    padding: 10px 14px;
 
     font-size: 12px;
 
@@ -780,7 +756,7 @@ footer p {
   }
 
   .logo {
-    font-size: 20px;
+    font-size: 24px;
 
     transform: translateX(0);
   }
@@ -851,5 +827,65 @@ footer p {
 
   .footer-grid {
     grid-template-columns: 1fr 1fr;
+  }
+}
+
+
+/* ================================
+   SMALL PHONES
+================================ */
+
+@media (max-width: 500px) {
+
+  .nav {
+    padding: 0 10px;
+
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 19px;
+
+    gap: 5px;
+  }
+
+  .logo img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .online {
+    padding: 9px 10px;
+
+    font-size: 11px;
+  }
+
+  .menu-btn,
+  .menu-btn i {
+    font-size: 24px;
+  }
+
+  .hero h1 {
+    font-size: 31px;
+  }
+
+  .hero p {
+    font-size: 16px;
+  }
+
+  .quick-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-item {
+    border-right: 0;
+  }
+
+  .promo-text {
+    padding: 35px 25px;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
   }
 }
