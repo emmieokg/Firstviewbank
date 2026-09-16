@@ -22,11 +22,6 @@ body {
   background: #fff;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -97,6 +92,7 @@ header {
   flex-shrink: 0;
   position: relative;
   left: 10px;
+  max-width: none
 }
 
 .logo span {
