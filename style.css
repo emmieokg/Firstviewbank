@@ -90,8 +90,8 @@ header {
 }
 
 .logo img {
-  width: 300px;
-  height: 300px;
+  width: 85px;
+  height: 85px;
   object-fit: contain;
   display: block;
   flex-shrink: 0;
@@ -144,7 +144,7 @@ header {
 
   /* Move button */
   position: relative;
-  left: -10px;
+  left: 10px;
 }
 
 
@@ -723,7 +723,7 @@ footer p {
   }
 
   .nav {
-    min-height: 65px;
+    min-height: 85px;
 
     padding: 0 15px;
 
@@ -763,8 +763,8 @@ footer p {
   }
 
   .logo img {
-    width: 100px;
-    height: 100px;
+    width: 85px;
+    height: 85px;
   }
 
 
@@ -836,7 +836,7 @@ footer p {
 
   .nav {
     padding: 0 10px;
-
+    min-height: 75px;
     gap: 8px;
   }
 
