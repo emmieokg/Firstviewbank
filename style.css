@@ -149,6 +149,7 @@ header {
   display: none;
   flex-shrink: 0;
   margin-left: auto;
+  transform: translateX(-25px);
 }
 
 .menu-btn {
@@ -711,7 +712,7 @@ footer p {
 
   .nav {
     min-height: 55px;
-    padding: 0 25px;
+    padding: 0 15px;
     gap: 10px;
   }
 
@@ -809,13 +810,8 @@ footer p {
 @media (max-width: 500px) {
 
   .nav {
-    padding: 0 25px;
+    padding: 0 10px;
     gap: 8px;
-  }
-
-   .mobile-menu {
-    display: block;
-    margin-left: auto;
   }
 
   .logo {
