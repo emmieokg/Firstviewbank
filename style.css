@@ -149,7 +149,7 @@ header {
 .mobile-menu {
   display: none;
   flex-shrink: 0;
-  padding-right: 20px;
+  padding-right: -10px;
 }
 
 .menu-btn {
@@ -729,7 +729,7 @@ footer p {
     display: block;
 
     margin-left: auto;
-    padding-right:20px;
+    padding-right:-10px;
   }
 
   .online {
