@@ -62,8 +62,7 @@ header {
   max-width: 1250px;
   min-height: 55px;
   margin: auto;
-  padding-right: 60px;
-
+  padding: 0 25px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -149,7 +148,6 @@ header {
 .mobile-menu {
   display: none;
   flex-shrink: 0;
-  transform: none;
   margin-left: auto;
 }
 
@@ -689,7 +687,6 @@ footer p {
   .mobile-menu {
     display: block;
     margin-left: auto;
-    transform: none;
   }
 
   .menu {
@@ -714,7 +711,7 @@ footer p {
 
   .nav {
     min-height: 55px;
-    padding-right: 60px;
+    padding: 0 25px;
     gap: 10px;
   }
 
@@ -727,7 +724,6 @@ footer p {
   .mobile-menu {
     display: block;
     margin-left: auto;
-    transform: none;
   }
 
   .online {
@@ -813,15 +809,13 @@ footer p {
 @media (max-width: 500px) {
 
   .nav {
-    padding-right: 60px;
+    padding: 0 25px;
     gap: 8px;
   }
 
    .mobile-menu {
     display: block;
-
     margin-left: auto;
-    transform: none;
   }
 
   .logo {
