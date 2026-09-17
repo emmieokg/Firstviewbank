@@ -62,7 +62,7 @@ header {
   max-width: 1250px;
   min-height: 55px;
   margin: auto;
-  padding: 0 25px;
+  padding-right: 60px;
 
   display: flex;
   align-items: center;
@@ -714,9 +714,7 @@ footer p {
 
   .nav {
     min-height: 55px;
-    
-    padding-right: 40px;
-
+    padding-right: 60px;
     gap: 10px;
   }
 
@@ -728,7 +726,6 @@ footer p {
   /* Show hamburger */
   .mobile-menu {
     display: block;
-
     margin-left: auto;
     transform: none;
   }
@@ -816,8 +813,7 @@ footer p {
 @media (max-width: 500px) {
 
   .nav {
-    padding-right: 30px;
-
+    padding-right: 60px;
     gap: 8px;
   }
 
