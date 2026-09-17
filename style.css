@@ -103,7 +103,7 @@ header {
   font-family: "Trajan Pro", serif;
 
   /* Move only Firstviewbank text */
-  transform: translateX(-40px);
+  transform: translateX(-35px);
 }
 
 
@@ -140,7 +140,7 @@ header {
   flex-shrink: 0;
 
   /* Move button */
-  transform: translateX(-30px);
+  transform: translateX(-10px);
 }
 
 
@@ -151,7 +151,7 @@ header {
   flex-shrink: 0;
 
   /* Move hamburger */
-  transform: translateX(-35px);
+  transform: translateX(-25px);
 }
 
 .menu-btn {
