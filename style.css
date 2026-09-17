@@ -688,7 +688,7 @@ footer p {
 
   .mobile-menu {
     display: block;
-
+    padding-right:60;
     margin-left: auto;
   }
 
