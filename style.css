@@ -149,7 +149,7 @@ header {
   display: none;
   flex-shrink: 0;
   margin-left: auto;
-  transform: translateX(-45px);
+  transform: translateX(10px);
 }
 
 .menu-btn {
