@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>My Accounts | Firstviewbank</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+
+    /* ================================
+       DASHBOARD
+    ================================= */
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+      font-family: "Inter", Arial, sans-serif;
+    }
+
+    .dashboard-header {
+      background: #fff;
+      color: #073b6b;
+      height: 70px;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .dashboard-top-actions {
+      display: flex;
+      margin left: auto;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .top-action {
+      background: none;
+      border: 0;
+      color: #073b6b;
+      cursor: pointer;
+      font-size: 20px;
+      position: relative;
+    }
+
+    .top-action span {
+      position: absolute;
+      top: -6px;
+      right: -7px;
+      background: #c82333;
+      color: white;
+      font-size: 9px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logout-button {
+      background: #c82333;
+      color: white;
+      border: 0;
+      padding: 10px 17px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+
+    /* ================================
+       DESKTOP NAV
+    ================================= */
+
+    .dashboard-nav {
+      background: white;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .dashboard-nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+    }
+
+    .dashboard-nav a {
+      color: #073b6b;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 18px 15px;
+      display: block;
+    }
+
+    .dashboard-nav a:hover {
+      background: #f1f4f7;
+    }
+
+
+    /* ================================
+       MAIN
+    ================================= */
+
+    .dashboard {
+      max-width: 1200px;
+      margin: 35px auto 80px;
+      padding: 0 20px;
+    }
+
+    .welcome {
+      margin-bottom: 25px;
+    }
+
+    .welcome h1 {
+      color: #073b6b;
+      font-size: 30px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: #666;
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       QUICK ACTIONS
+    ================================= */
+
+    .quick-actions {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .quick-action {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .quick-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .quick-action i {
+      font-size: 24px;
+      color: #073b6b;
+      margin-bottom: 10px;
+    }
+
+    .quick-action strong {
+      display: block;
+      color: #073b6b;
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       ACCOUNT SECTION
+    ================================= */
+
+    .section-title {
+      color: #073b6b;
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .accounts {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .account-box {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .account-box-header {
+      background: #073b6b;
+      color: white;
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .account-box-header h3 {
+      font-size: 16px;
+    }
+
+    .account-box-header i {
+      font-size: 20px;
+    }
+
+    .account-box-body {
+      padding: 22px;
+    }
+
+    .account-label {
+      color: #777;
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+
+    .account-balance {
+      color: #222;
+      font-size: 28px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .account-number {
+      color: #666;
+      font-size: 13px;
+    }
+
+    .account-footer {
+      border-top: 1px solid #eee;
+      padding: 13px 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .account-footer a {
+      color: #075b91;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+
+    /* ================================
+       ACTIVITY
+    ================================= */
+
+    .activity-section {
+      margin-top: 35px;
+    }
+
+    .activity-box {
+      background: white;
+      border: 1px solid #ddd;
+    }
+
+    .activity-row {
+      padding: 18px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .activity-row:last-child {
+      border-bottom: 0;
+    }
+
+    .activity-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .activity-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #eef3f6;
+      color: #073b6b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .activity-name {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .activity-date {
+      color: #777;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .activity-amount {
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+
+    /* ================================
+       FINANCIAL TOOLS
+    ================================= */
+
+    .tools-section {
+      margin-top: 35px;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .tool {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 25px;
+    }
+
+    .tool i {
+      color: #073b6b;
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .tool h3 {
+      color: #073b6b;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .tool p {
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+
+    .tool a {
+      color: #b51e2c;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+
+    /* ================================
+       SECURITY
+    ================================= */
+
+    .security-card {
+      margin-top: 35px;
+      background: #eef3f6;
+      border: 1px solid #d7e0e6;
+      padding: 22px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .security-card i {
+      color: #073b6b;
+      font-size: 30px;
+    }
+
+    .security-card h3 {
+      color: #073b6b;
+      margin-bottom: 5px;
+    }
+
+    .security-card p {
+      color: #666;
+      font-size: 13px;
+    }
+
+
+    /* ================================
+       MOBILE BOTTOM NAV
+    ================================= */
+
+    .mobile-bottom-nav {
+      display: none;
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================= */
+
+    @media (max-width: 700px) {
+
+      .dashboard-header {
+        height: 62px;
+        padding: 0 15px;
+        align-items:center;
+      }
+
+      .dashboard-top-actions {
+        gap:10px;
+        margin-left:auto;
+      }
+
+        .logout-button {
+        display: block;
+        padding: 8px 10px;
+        font-size: 11px;
+      }
+      
+
+      .dashboard-nav {
+        display: none;
+      }
+
+      .dashboard {
+        margin-top: 25px;
+        margin-bottom: 85px;
+        padding: 0 15px;
+      }
+
+      .welcome h1 {
+        font-size: 25px;
+      }
+
+      .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .accounts {
+        grid-template-columns: 1fr;
+      }
+
+      .tools {
+        grid-template-columns: 1fr;
+      }
+
+      .activity-row {
+        padding: 15px;
+      }
+
+
+      /* MOBILE BOTTOM NAV */
+
+      .mobile-bottom-nav {
+        position: fixed;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 68px;
+        background: white;
+        border-top: 1px solid
+#ddd;
+        z-index: 1000;
+        box-shadow: 0 -3px 15px rgba(0,0,0,0.08);
+      }
+
+      .mobile-bottom-nav a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #666;
+        font-size: 10px;
+        gap: 5px;
+        text-decoration: none;
+      }
+
+      .mobile-bottom-nav a i {
+        font-size: 19px;
+      }
+
+      .mobile-bottom-nav a.active {
+        color: #073b6b;
+        font-weight: bold;
+      }
+
+      .security-card {
+        align-items: flex-start;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- ================================
+       HEADER
+  ================================= -->
+
+  <header class="dashboard-header">
+
+    <div class="dashboard-top-actions">
+
+      <button
+        type="button"
+        class="top-action"
+        title="Notifications"
+      >
+        <i class="fa-regular fa-bell"></i>
+        <span>2</span>
+      </button>
+
+      <button
+        type="button"
+        class="top-action"
+        title="Messages"
+      >
+        <i class="fa-regular fa-envelope"></i>
+      </button>
+
+      <button
+        type="button"
+        class="top-action"
+        title="Profile"
+      >
+        <i class="fa-regular fa-user"></i>
+      </button>
+
+      <button
+        type="button"
+        class="logout-button"
+        onclick="logoutUser()"
+      >
+        Sign Out
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ================================
+       DESKTOP NAVIGATION
+  ================================= -->
+
+  <nav class="dashboard-nav">
+
+    <div class="dashboard-nav-inner">
+
+      <a href="#">
+        Accounts
+      </a>
+
+      <a href="#">
+        Pay & Transfer
+      </a>
+
+      <a href="#">
+        Cards
+      </a>
+
+      <a href="#">
+        Deposit
+      </a>
+
+      <a href="#">
+        Investing
+      </a>
+
+      <a href="#">
+        Financial Tools
+      </a>
+
+      <a href="#">
+        Support
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- ================================
+       MAIN DASHBOARD
+  ================================= -->
+
+  <main class="dashboard">
+
+
+    <!-- WELCOME -->
+
+    <section class="welcome">
+
+      <h1>
+        Welcome, <span id="welcomeName">Customer</span>
+      </h1>
+
+      <p>
+        Here's an overview of your Firstviewbank accounts.
+      </p>
+
+    </section>
+
+
+    <!-- QUICK ACTIONS -->
+
+    <section class="quick-actions">
+
+      <div class="quick-action">
+        <i class="fa-solid fa-arrow-right-arrow-left"></i>
+        <strong>Transfer Money</strong>
+      </div>
+
+      <div class="quick-action">
+        <i class="fa-regular fa-credit-card"></i>
+        <strong>Pay a Card</strong>
+      </div>
+
+      <div class="quick-action">
+        <i class="fa-solid fa-money-bill-transfer"></i>
+        <strong>Deposit</strong>
+      </div>
+
+      <div class="quick-action">
+        <i class="fa-solid fa-file-invoice-dollar"></i>
+        <strong>Pay Bills</strong>
+      </div>
+
+    </section>
+
+
+    <!-- ACCOUNTS -->
+
+    <h2 class="section-title">
+      Your Accounts
+    </h2>
+
+
+    <section class="accounts">
+
+
+      <!-- CHECKING -->
+
+      <div class="account-box">
+
+        <div class="account-box-header">
+
+          <h3>
+            Everyday Checking
+          </h3>
+
+          <i class="fa-solid fa-building-columns"></i>
+
+        </div>
+
+        <div class="account-box-body">
+
+          <div class="account-label">
+            Available balance
+          </div>
+
+          <div class="account-balance">
+            $0.00
+          </div>
+
+          <div class="account-number">
+            Account ending in •••• 0000
+          </div>
+
+        </div>
+
+        <div class="account-footer">
+          <a href="#">View account</a>
+          <a href="#">Activity</a>
+        </div>
+
+      </div>
+
+
+      <!-- SAVINGS -->
+
+      <div class="account-box">
+
+        <div class="account-box-header">
+
+          <h3>
+            Personal Savings
+          </h3>
+
+          <i class="fa-solid fa-piggy-bank"></i>
+
+        </div>
+
+        <div class="account-box-body">
+
+          <div class="account-label">
+            Available balance
+          </div>
+
+          <div class="account-balance">
+            $0.00
+          </div>
+
+          <div class="account-number">
+            Account ending in •••• 0000
+          </div>
+
+        </div>
+
+        <div class="account-footer">
+          <a href="#">View account</a>
+          <a href="#">Activity</a>
+        </div>
+
+      </div>
+
+
+      <!-- CREDIT CARD -->
+
+      <div class="account-box">
+
+        <div class="account-box-header">
+
+          <h3>
+            Firstview Credit Card
+          </h3>
+
+          <i class="fa-solid fa-credit-card"></i>
+
+        </div>
+
+        <div class="account-box-body">
+
+          <div class="account-label">
+            Current balance
+          </div>
+
+          <div class="account-balance">
+            $0.00
+          </div>
+
+          <div class="account-number">
+            Card ending in •••• 0000
+          </div>
+
+        </div>
+
+        <div class="account-footer">
+          <a href="#">View card</a>
+          <a href="#">Make payment</a>
+        </div>
+
+      </div>
+
+
+      <!-- INVESTING -->
+
+      <div class="account-box">
+
+        <div class="account-box-header">
+
+          <h3>
+            Investment Account
+          </h3>
+
+          <i class="fa-solid fa-chart-line"></i>
+
+        </div>
+
+        <div class="account-box-body">
+
+          <div class="account-label">
+            Portfolio value
+          </div>
+
+          <div class="account-balance">
+            $0.00
+          </div>
+
+          <div class="account-number">
+            Investment account ending in •••• 0000
+          </div>
+
+        </div>
+
+        <div class="account-footer">
+          <a href="#">View portfolio</a>
+          <a href="#">Invest</a>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RECENT ACTIVITY -->
+
+    <section class="activity-section">
+
+      <h2 class="section-title">
+        Recent Activity
+      </h2>
+
+      <div class="activity-box">
+
+        <div class="activity-row">
+
+          <div class="activity-left">
+
+            <div class="activity-icon">
+              <i class="fa-solid fa-arrow-down"></i>
+            </div>
+
+            <div>
+              <div class="activity-name">
+                No recent activity
+              </div>
+
+              <div class="activity-date">
+                Your latest transactions will appear here.
+              </div>
+            </div>
+
+          </div>
+
+          <div class="activity-amount">
+            —
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FINANCIAL TOOLS -->
+
+    <section class="tools-section">
+
+      <h2 class="section-title">
+        Financial Tools
+      </h2>
+
+      <div class="tools">
+
+
+        <div class="tool">
+
+          <i class="fa-solid fa-chart-pie"></i>
+
+          <h3>
+            Spending Overview
+          </h3>
+
+          <p>
+            Review your spending activity and keep track of where your money goes.
+          </p>
+
+          <a href="#">
+            Explore spending →
+          </a>
+
+        </div>
+
+
+        <div class="tool">
+
+          <i class="fa-solid fa-bullseye"></i>
+
+          <h3>
+            Savings Goals
+          </h3>
+
+          <p>
+            Set goals and monitor your progress toward the things that matter to you.
+          </p>
+
+          <a href="#">
+            Manage goals →
+          </a>
+
+        </div>
+
+
+        <div class="tool">
+
+          <i class="fa-solid fa-arrow-trend-up"></i>
+
+          <h3>
+            Investing
+          </h3>
+
+          <p>
+            Explore your investment portfolio and review your long-term financial plans.
+          </p>
+
+          <a href="#">
+            View investments →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- SECURITY -->
+
+    <section class="security-card">
+
+      <i class="fa-solid fa-shield-halved"></i>
+
+      <div>
+
+        <h3>
+          Your account security
+        </h3>
+
+        <p>
+          Review your security settings and keep your account information protected.
+        </p>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- ================================
+       MOBILE BOTTOM NAVIGATION
+  ================================= -->
+
+  <nav class="mobile-bottom-nav">
+
+    <a href="#" class="active">
+      <i class="fa-solid fa-house"></i>
+      <span>Home</span>
+    </a>
+
+    <a href="#">
+      <i class="fa-solid fa-wallet"></i>
+      <span>Accounts</span>
+    </a>
+
+    <a href="#">
+      <i class="fa-solid fa-arrow-right-arrow-left"></i>
+      <span>Transfer</span>
+    </a>
+
+    <a href="#">
+      <i class="fa-regular fa-credit-card"></i>
+      <span>Cards</span>
+    </a>
+
+    <a href="#">
+      <i class="fa-solid fa-bars"></i>
+      <span>More</span>
+    </a>
+
+  </nav>
+
+
+  <!-- SUPABASE -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="js/auth.js"></script>
+
+
+  <!-- LOAD USER -->
+
+  <script>
+
+    async function loadDashboard() {
+
+      const user = await requireAuth();
+
+      if (!user) return;
+
+      const firstName =
+        user.user_metadata?.first_name || "";
+
+      document.getElementById("welcomeName").textContent =
+        firstName || "Customer";
+
+    }
+
+    loadDashboard();
+
+  </script>
+
+
+</body>
+</html>
