@@ -149,7 +149,7 @@ header {
 .mobile-menu {
   display: none;
   flex-shrink: 0;
-  padding-right: 60px;
+  transform: none;
   margin-left: auto;
 }
 
@@ -688,8 +688,8 @@ footer p {
 
   .mobile-menu {
     display: block;
-    padding-right:60;
     margin-left: auto;
+    transform: none;
   }
 
   .menu {
@@ -714,8 +714,8 @@ footer p {
 
   .nav {
     min-height: 55px;
-
-    padding: 0 15px;
+    
+    padding-right: 40px;
 
     gap: 10px;
   }
@@ -730,7 +730,7 @@ footer p {
     display: block;
 
     margin-left: auto;
-    padding-right: 60px;
+    transform: none;
   }
 
   .online {
@@ -816,7 +816,7 @@ footer p {
 @media (max-width: 500px) {
 
   .nav {
-    padding: 0 10px;
+    padding-right: 30px;
 
     gap: 8px;
   }
