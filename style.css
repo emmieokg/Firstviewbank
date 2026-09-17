@@ -149,9 +149,7 @@ header {
 .mobile-menu {
   display: none;
   flex-shrink: 0;
-
-  /* Move hamburger */
-  transform: translateX(-25px);
+  padding-right: 10px;
 }
 
 .menu-btn {
@@ -731,6 +729,7 @@ footer p {
     display: block;
 
     margin-left: auto;
+    padding-right:10px;
   }
 
   .online {
