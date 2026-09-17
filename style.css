@@ -821,6 +821,13 @@ footer p {
     gap: 8px;
   }
 
+   .mobile-menu {
+    display: block;
+
+    margin-left: auto;
+    transform: none;
+  }
+
   .logo {
     font-size: 19px;
 
