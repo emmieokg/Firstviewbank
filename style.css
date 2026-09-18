@@ -297,6 +297,24 @@ header {
   line-height: 1.1;
   margin-bottom: 20px;
 }
+.demo-warning {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  color: #664d03;
+  padding: 14px 18px;
+  border-radius: 8px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.demo-warning strong {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.demo-warning span {
+  font-size: 14px;
+}
 
 .hero p {
   font-size: 19px;
