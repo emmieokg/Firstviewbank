@@ -60,7 +60,7 @@ header {
 .nav {
   width: 100%;
   max-width: 1250px;
-  min-height: 35px;
+  min-height: 40px;
   margin: auto;
   padding: 0 25px;
   display: flex;
@@ -711,7 +711,7 @@ footer p {
   }
 
   .nav {
-    min-height: 35px;
+    min-height: 49px;
     padding: 0 15px;
     gap: 10px;
   }
