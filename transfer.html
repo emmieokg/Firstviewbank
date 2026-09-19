@@ -2,15 +2,10 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <title>Transfer Money | Firstviewbank</title>
+  <title>Transfer | Firstviewbank</title>
 
   <link
     rel="stylesheet"
@@ -18,7 +13,6 @@
   >
 
   <link rel="stylesheet" href="bank-pages.css">
-
 </head>
 
 </header>
@@ -31,8 +25,9 @@
     Back to Dashboard
   </a>
 
+
   <p class="page-subtitle">
-    Send money between eligible accounts or to a recipient.
+    Transfer money to an external bank account.
   </p>
 
 
@@ -42,103 +37,106 @@
       Transfer Details
     </h2>
 
+    <form onsubmit="
+      event.preventDefault();
+      alert('Transfers are not connected to a real banking provider yet.');
+    ">
 
-    <form
-      onsubmit="
-        event.preventDefault();
-        alert('Transfers are not connected to a real banking provider yet.');
-      "
-    >
+<!-- FROM -->
+<div class="field full">
+  <label for="fromAccount">
+    From
+  </label>
+  <select id="fromAccount" name="fromAccount" required>
+    <option value="">Select account</option>
+    <option value="checking">Checking Account</option>
+    <option value="savings">Savings Account</option>
+  </select>
+</div>
 
-      <div class="form-grid">
+<!-- TO -->
 
-        <div class="field">
+<div class="field full">
+  <label for="transferTo">
+    To
+  </label>
+  <select id="transferTo" name="transferTo" required>
+    <option value="external-bank">
+      External Bank Account
+    </option>
+  </select>
+</div>
 
-          <label for="fromAccount">
-            From
-          </label>
+      <!-- BANK NAME -->
 
-          <select id="fromAccount">
+      <div class="field full">
 
-            <option>
-              Checking Account
-            </option>
+        <label for="bankName">
+          Bank Name
+        </label>
 
-            <option>
-              Savings Account
-            </option>
+        <button
+          type="button"
+          id="bankSelector"
+          class="bank-selector"
+          onclick="openBankPopup()"
+        >
 
-          </select>
+          <span id="selectedBank">
+            Select a bank
+          </span>
 
-        </div>
+          <i class="fa-solid fa-chevron-down"></i>
 
+        </button>
 
-        <div class="field">
+        <input
+          type="hidden"
+          id="bankName"
+          name="bankName"
+        >
 
-          <label for="toAccount">
-            To
-          </label>
-
-          <select id="toAccount">
-
-            <option>
-              Firstviewbank
-            </option>
-
-            <option>
-              Another Bank
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <div class="field">
-
-          <label for="recipient">
-            Recipient
-          </label>
-
-          <input
-            id="recipient"
-            type="text"
-            placeholder="Name or account identifier"
-          >
-
-        </div>
+      </div>
 
 
-        <div class="field">
+      <!-- ROUTING NUMBER -->
 
-          <label for="transferAmount">
-            Amount
-          </label>
+      <div class="field full">
 
-          <input
-            id="transferAmount"
-            type="number"
-            min="0"
-            step="0.01"
-            placeholder="0.00"
-            required
-          >
+        <label for="routingNumber">
+          Routing Number
+        </label>
 
-        </div>
+        <input
+          id="routingNumber"
+          name="routingNumber"
+          type="text"
+          inputmode="numeric"
+          placeholder="Enter routing number"
+          autocomplete="off"
+          required
+        >
+
+      </div>
 
 
-        <div class="field full">
+      <!-- AMOUNT -->
 
-          <label for="transferNote">
-            Note (optional)
-          </label>
+      <div class="field full">
 
-          <textarea
-            id="transferNote"
-            placeholder="Add a note"
-          ></textarea>
+        <label for="transferAmount">
+          Amount
+        </label>
 
-        </div>
+        <input
+          id="transferAmount"
+          name="transferAmount"
+          type="number"
+          min="0"
+          step="0.01"
+          placeholder="0.00"
+          required
+        >
 
       </div>
 
@@ -149,7 +147,7 @@
           class="primary-btn"
           type="submit"
         >
-          Review Transfer
+          Continue
         </button>
 
         <a
@@ -168,8 +166,199 @@
 </main>
 
 
+<!-- BANK POPUP -->
+
+<div
+  id="bankPopup"
+  class="bank-popup-overlay"
+  onclick="closeBankPopup(event)"
+>
+
+  <div
+    class="bank-popup"
+    onclick="event.stopPropagation()"
+  >
+
+    <div class="bank-popup-header">
+
+      <h2>
+        Select Bank
+      </h2>
+
+      <button
+        type="button"
+        class="bank-popup-close"
+        onclick="closeBankPopup()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="bank-search">
+
+      <i class="fa-solid fa-magnifying-glass"></i>
+
+      <input
+        type="search"
+        id="bankSearch"
+        placeholder="Search bank name..."
+        oninput="filterBanks()"
+        autocomplete="off"
+      >
+
+    </div>
+
+
+    <div
+      class="bank-list"
+      id="bankList"
+    >
+
+
+      <!-- UNITED STATES -->
+
+      <div class="bank-region">
+        United States
+      </div>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Bank of America')"
+      >
+        Bank of America
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('JPMorgan Chase')"
+      >
+        JPMorgan Chase
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Wells Fargo')"
+      >
+        Wells Fargo
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Citibank')"
+      >
+        Citibank
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('U.S. Bank')"
+      >
+        U.S. Bank
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('PNC Bank')"
+      >
+        PNC Bank
+      </button>
+
+
+      <!-- EUROPE -->
+
+      <div class="bank-region">
+        Europe
+      </div>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Barclays')"
+      >
+        Barclays
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('HSBC')"
+      >
+        HSBC
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Deutsche Bank')"
+      >
+        Deutsche Bank
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('BNP Paribas')"
+      >
+        BNP Paribas
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('Santander')"
+      >
+        Santander
+      </button>
+
+      <button
+        type="button"
+        class="bank-option"
+        onclick="selectBank('ING')"
+      >
+        ING
+      </button>
+
+
+      <!-- MANUAL ENTRY -->
+
+      <div class="bank-region">
+        Other
+      </div>
+
+      <button
+        type="button"
+        class="bank-option manual-bank"
+        onclick="enterBankManually()"
+      >
+
+        <i class="fa-solid fa-pen"></i>
+
+        Enter bank name manually
+
+      </button>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script src="js/auth.js"></script>
+
 
 <script>
 
@@ -181,7 +370,340 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 });
 
+
+function openBankPopup() {
+
+  const popup =
+    document.getElementById("bankPopup");
+
+  popup.classList.add("open");
+
+  document.getElementById("bankSearch").value = "";
+
+  filterBanks();
+
+  setTimeout(() => {
+
+    document
+      .getElementById("bankSearch")
+      .focus();
+
+  }, 100);
+
+}
+
+
+function closeBankPopup(event) {
+
+  if (
+    event &&
+    event.target !==
+    document.getElementById("bankPopup")
+  ) {
+    return;
+  }
+
+  document
+    .getElementById("bankPopup")
+    .classList.remove("open");
+
+}
+
+
+function selectBank(bankName) {
+
+  document.getElementById(
+    "selectedBank"
+  ).textContent = bankName;
+
+  document.getElementById(
+    "bankName"
+  ).value = bankName;
+
+  closeBankPopup();
+
+}
+
+
+function enterBankManually() {
+
+  const bankName = prompt(
+    "Enter the bank name:"
+  );
+
+  if (!bankName) {
+    return;
+  }
+
+  const trimmedName =
+    bankName.trim();
+
+  if (!trimmedName) {
+    return;
+  }
+
+  selectBank(trimmedName);
+
+}
+
+
+function filterBanks() {
+
+  const search =
+    document
+      .getElementById("bankSearch")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const options =
+    document.querySelectorAll(
+      ".bank-option"
+    );
+
+  options.forEach(option => {
+
+    const bankName =
+      option.textContent
+        .toLowerCase()
+        .trim();
+
+    if (bankName.includes(search)) {
+
+      option.style.display = "flex";
+
+    } else {
+
+      option.style.display = "none";
+
+    }
+
+  });
+
+}
+
 </script>
+
+
+<style>
+
+/* Bank selector */
+
+.bank-selector {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  color: #333;
+}
+
+.bank-selector i {
+  color: #666;
+}
+
+
+/* Popup */
+
+.bank-popup-overlay {
+  position: fixed;
+  inset: 0;
+
+  background: rgba(0, 0, 0, .45);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  z-index: 2000;
+
+  opacity: 0;
+  visibility: hidden;
+
+  transition: .2s ease;
+}
+
+.bank-popup-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.bank-popup {
+  width: 100%;
+  max-width: 500px;
+
+  max-height: 80vh;
+
+  background: #fff;
+
+  border-radius: 8px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, .25);
+}
+
+
+/* Popup header */
+
+.bank-popup-header {
+  padding: 18px 20px;
+
+  border-bottom: 1px solid #ddd;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bank-popup-header h2 {
+  margin: 0;
+
+  font-size: 20px;
+
+  color: #073b6b;
+}
+
+
+.bank-popup-close {
+  border: none;
+  background: transparent;
+
+  font-size: 24px;
+
+  cursor: pointer;
+
+  color: #555;
+}
+
+
+/* Search */
+
+.bank-search {
+  padding: 15px 20px;
+
+  border-bottom: 1px solid #eee;
+
+  position: relative;
+}
+
+.bank-search i {
+  position: absolute;
+
+  left: 34px;
+  top: 31px;
+
+  color: #888;
+}
+
+.bank-search input {
+  width: 100%;
+  height: 45px;
+
+  padding: 0 14px 0 40px;
+
+  border: 1px solid #ccc;
+
+  border-radius: 4px;
+
+  font-size: 15px;
+
+  outline: none;
+}
+
+.bank-search input:focus {
+  border-color: #073b6b;
+}
+
+
+/* Bank list */
+
+.bank-list {
+  max-height: 55vh;
+
+  overflow-y: auto;
+}
+
+
+.bank-region {
+  padding: 12px 20px;
+
+  background: #f5f6f8;
+
+  color: #666;
+
+  font-size: 12px;
+
+  font-weight: bold;
+
+  text-transform: uppercase;
+}
+
+
+.bank-option {
+  width: 100%;
+
+  padding: 15px 20px;
+
+  border: none;
+
+  border-bottom: 1px solid #eee;
+
+  background: #fff;
+
+  text-align: left;
+
+  font-size: 15px;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+.bank-option:hover {
+  background: #f5f8fb;
+}
+
+
+.manual-bank {
+  color: #073b6b;
+
+  font-weight: bold;
+}
+
+
+/* Mobile */
+
+@media (max-width: 500px) {
+
+  .bank-popup {
+    max-height: 85vh;
+  }
+
+  .bank-list {
+    max-height: 60vh;
+  }
+
+}
+
+</style>
 
 </body>
 </html>
