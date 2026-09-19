@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Notifications | Firstviewbank</title>
+  <title>Deposit | Firstviewbank</title>
 
   <link
     rel="stylesheet"
@@ -59,34 +59,122 @@
     Back to Dashboard
   </a>
 
-
   <h1 class="page-title">
-    Notifications
+    Deposit
   </h1>
 
-
   <p class="page-subtitle">
-    Important account alerts and updates.
+    Add money to one of your Firstviewbank accounts.
   </p>
+
+
+  <div class="notice">
+
+    <i class="fa-solid fa-circle-info"></i>
+
+    This interface is currently a demonstration.
+    It does not move real money.
+
+  </div>
 
 
   <section class="card">
 
-    <div class="empty">
+    <h2 class="card-title">
+      Deposit Details
+    </h2>
 
-      <i
-        class="fa-regular fa-bell"
-        style="
-          font-size:28px;
-          display:block;
-          margin-bottom:12px;
-          color:#073b6b;
-        "
-      ></i>
 
-      No new notifications.
+    <form
+      onsubmit="
+        event.preventDefault();
+        alert('Deposit is not connected to a real payment or banking provider yet.');
+      "
+    >
 
-    </div>
+      <div class="form-grid">
+
+        <div class="field full">
+
+          <label for="depositAccount">
+            Deposit into
+          </label>
+
+          <select id="depositAccount">
+
+            <option>
+              Checking Account
+            </option>
+
+            <option>
+              Savings Account
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="depositMethod">
+            Deposit method
+          </label>
+
+          <select id="depositMethod">
+
+            <option>
+              Bank transfer
+            </option>
+
+            <option>
+              Debit card
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="field">
+
+          <label for="depositAmount">
+            Amount
+          </label>
+
+          <input
+            id="depositAmount"
+            type="number"
+            min="0"
+            step="0.01"
+            placeholder="0.00"
+            required
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="primary-btn"
+          type="submit"
+        >
+          Continue
+        </button>
+
+        <a
+          class="secondary-btn"
+          href="dashboard.html"
+        >
+          Cancel
+        </a>
+
+      </div>
+
+    </form>
 
   </section>
 
