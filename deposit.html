@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Notifications | Firstviewbank</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="bank-pages.css">
+
+</head>
+
+<body>
+
+<header class="page-header">
+
+  <div class="page-header-inner">
+
+    <a href="dashboard.html" class="brand">
+      Firstviewbank
+    </a>
+
+    <div class="header-actions">
+
+      <a href="notifications.html" class="icon-btn">
+        <i class="fa-solid fa-bell"></i>
+      </a>
+
+      <a href="messages.html" class="icon-btn">
+        <i class="fa-solid fa-envelope"></i>
+      </a>
+
+      <a href="profile.html" class="icon-btn">
+        <i class="fa-solid fa-user"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="page-wrap">
+
+  <a href="dashboard.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Dashboard
+  </a>
+
+
+  <h1 class="page-title">
+    Notifications
+  </h1>
+
+
+  <p class="page-subtitle">
+    Important account alerts and updates.
+  </p>
+
+
+  <section class="card">
+
+    <div class="empty">
+
+      <i
+        class="fa-regular fa-bell"
+        style="
+          font-size:28px;
+          display:block;
+          margin-bottom:12px;
+          color:#073b6b;
+        "
+      ></i>
+
+      No new notifications.
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer class="page-footer">
+  © 2026 Firstviewbank. Demo interface.
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+  if (typeof requireAuth === "function") {
+    await requireAuth();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
