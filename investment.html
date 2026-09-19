@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Investing | Firstviewbank</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="bank-pages.css">
+
+</head>
+
+</header>
+
+
+<main class="page-wrap">
+
+  <a href="dashboard.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Dashboard
+  </a>
+
+
+  <p class="page-subtitle">
+    Review your investment account and portfolio information.
+  </p>
+
+  <section class="card">
+
+    <div class="account-summary">
+
+      <div>
+
+        <small>
+          Portfolio value
+        </small>
+
+        <div class="account-balance">
+          $0.00
+        </div>
+
+        <small>
+          Investment Account
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <div class="option-grid">
+
+      <div class="option">
+
+        <i class="fa-solid fa-chart-line"></i>
+
+        <strong>
+          Portfolio
+        </strong>
+
+        <span>
+          View holdings and allocation.
+        </span>
+
+      </div>
+
+
+      <div class="option">
+
+        <i class="fa-solid fa-arrow-trend-up"></i>
+
+        <strong>
+          Performance
+        </strong>
+
+        <span>
+          Review portfolio performance.
+        </span>
+
+      </div>
+
+
+      <div class="option">
+
+        <i class="fa-solid fa-file-lines"></i>
+
+        <strong>
+          Statements
+        </strong>
+
+        <span>
+          View investment statements.
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+  if (typeof requireAuth === "function") {
+    await requireAuth();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
