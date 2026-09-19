@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Profile | Firstviewbank</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="bank-pages.css">
+
+</head>
+
+</header>
+
+
+<main class="page-wrap">
+
+  <a href="dashboard.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Dashboard
+  </a>
+
+
+  <h1 class="page-title">
+    Profile
+  </h1>
+
+
+  <p class="page-subtitle">
+    View the information associated with your Firstviewbank account.
+  </p>
+
+
+  <section class="card">
+
+    <h2 class="card-title">
+      Personal Information
+    </h2>
+
+
+    <div class="profile-grid">
+
+      <div class="info-box">
+
+        <span>
+          First name
+        </span>
+
+        <strong id="profileFirstName">
+          Customer
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Last name
+        </span>
+
+        <strong id="profileLastName">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Email address
+        </span>
+
+        <strong id="profileEmail">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Account
+        </span>
+
+        <strong>
+          Firstviewbank Customer
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2 class="card-title">
+      Account Actions
+    </h2>
+
+
+    <div class="form-actions">
+
+      <button
+        class="secondary-btn"
+        type="button"
+        onclick="logoutUser()"
+      >
+        Sign Out
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/auth.js"></script>
+
+
+<script>
+
+(async function () {
+
+  if (typeof requireAuth !== "function") {
+    return;
+  }
+
+  const user = await requireAuth();
+
+  if (!user) {
+    return;
+  }
+
+  const metadata = user.user_metadata || {};
+
+  document.getElementById("profileFirstName").textContent =
+    metadata.first_name || "Customer";
+
+  document.getElementById("profileLastName").textContent =
+    metadata.last_name || "—";
+
+  document.getElementById("profileEmail").textContent =
+    user.email || "—";
+
+})();
+
+</script>
+
+</body>
+</html>
