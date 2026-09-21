@@ -475,6 +475,7 @@ header {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 25px;
+  border-radius: 12px;
 }
 
 .card {
@@ -528,6 +529,7 @@ header {
 
 .promo {
   padding: 70px 5%;
+  border-radius:12px;
 }
 
 .promo-inner {
@@ -544,6 +546,7 @@ header {
 
 .promo-image {
   overflow: hidden;
+  border-radius:12px;
 }
 
 .promo-image img {
