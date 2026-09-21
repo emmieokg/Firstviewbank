@@ -538,7 +538,8 @@ header {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 300px;
-  border-radius:12px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
 }
 
 .promo-image {
@@ -550,7 +551,7 @@ header {
   height: 100%;
   object-fit: cover;
   display: block;
-  border-radius:12px;
+  border-radius: 12px 12px 0 0;
 }
 
 .promo-text {
