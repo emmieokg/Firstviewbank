@@ -537,14 +537,11 @@ header {
 
 .white-btn {
   display: inline-block;
-
   margin-top: 25px;
-
   background: white;
   color: #073b6b;
-
+  border-margin: 12px;
   padding: 13px 23px;
-
   font-weight: bold;
 }
 
