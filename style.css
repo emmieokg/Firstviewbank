@@ -760,6 +760,7 @@ footer p {
 .quick-item {
   border: none;
   box-shadow: none;
+  text-align:left;
 }
 
 
@@ -841,6 +842,7 @@ footer p {
 .quick-item {
   border: none;
   box-shadow: none;
+  text-align:left;
 }
 
   .promo-text {
