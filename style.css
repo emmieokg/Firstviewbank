@@ -329,13 +329,12 @@ header {
   margin: auto;
 
   display: grid !important;
-  grid-template-columns: repeat(2, 1fr) !important;
 }
 
 .quick-item {
   padding: 24px;
 
-  text-align: center;
+  text-align: left;
 
   border-right: 1px solid #ddd;
 }
