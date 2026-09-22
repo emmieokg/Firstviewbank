@@ -373,8 +373,7 @@ header {
 
 .checking-promo-image img {
   width: 100%;
-  height: 320px;
-  object-fit: cover;
+  height: auto;
   display: block;
   border-radius: 12px 12px 0 0;
 }
