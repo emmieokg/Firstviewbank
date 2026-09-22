@@ -298,24 +298,6 @@ header {
   line-height: 1.1;
   margin-bottom: 20px;
 }
-.demo-warning {
-  background: #fff3cd;
-  border: 1px solid #ffc107;
-  color: #664d03;
-  padding: 14px 18px;
-  border-radius: 8px;
-  margin-bottom: 25px;
-  text-align: center;
-}
-
-.demo-warning strong {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.demo-warning span {
-  font-size: 14px;
-}
 
 .hero p {
   font-size: 19px;
@@ -325,19 +307,16 @@ header {
 
 .red-btn {
   display: inline-block;
-
   background: #c82333;
   color: #fff;
-
   padding: 15px 28px;
-
   font-weight: bold;
-  border-radius: 3px;
+  border-radius: 12px;
 }
 
 
 /* ================================
-   DEMO LOGIN
+   LOGIN
 ================================ */
 
 .login {
