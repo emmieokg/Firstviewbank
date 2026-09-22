@@ -327,14 +327,14 @@ header {
   max-width: 1150px;
   margin: auto;
   display: grid;
+  border: none;
+  box-shadow: none;
 }
 
 .quick-item {
   padding: 24px;
   text-align: left;
   border-right: 1px solid #ddd;
-  border: none;
-  box-shadow: none;
 }
 
 .quick-item strong {
