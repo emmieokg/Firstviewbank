@@ -327,14 +327,13 @@ header {
   max-width: 1150px;
   margin: auto;
   display: grid;
-  border: none;
-  box-shadow: none;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .quick-item {
   padding: 24px;
-  text-align: left;
+  text-align: center;
+  border-right: 1px solid #ddd;
 }
 
 .quick-item strong {
@@ -750,9 +749,18 @@ footer p {
   /* QUICK LINKS */
 
 
-  .quick-item {
-    border-bottom: 1px solid #ddd;
-  }
+  .quick-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 0;
+  border: none;
+}
+
+.quick-item {
+  border: none;
+  box-shadow: none;
+}
 
 
   /* PRODUCTS */
@@ -822,13 +830,18 @@ footer p {
     font-size: 16px;
   }
 
-  .quick-inner {
-    grid-template-columns: 1fr;
-  }
+ .quick-inner {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 0;
+  border: none;
+}
 
-  .quick-item {
-    border-right: 0;
-  }
+.quick-item {
+  border: none;
+  box-shadow: none;
+}
 
   .promo-text {
     padding: 35px 25px;
