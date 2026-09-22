@@ -749,9 +749,6 @@ footer p {
 
   /* QUICK LINKS */
 
-  .quick-inner {
-    grid-template-columns: 1fr 1fr;
-  }
 
   .quick-item {
     border-bottom: 1px solid #ddd;
@@ -847,10 +844,7 @@ footer p {
 
 .quick-inner {
 
-  display: grid !important;
-
-  grid-template-columns: repeat(2, 1fr) !important;
-
+  display: grid;
 }
 
 .quick-item {
