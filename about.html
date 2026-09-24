@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>About Us | Firstviewbank</title>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+      font-family: "Inter", Arial, sans-serif;
+      line-height: 1.7;
+    }
+
+    /* Header */
+    .about-header {
+      background: #fff;
+      height: 70px;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #073b6b;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .back-button i {
+      font-size: 16px;
+    }
+
+    .back-button:hover {
+      opacity: 0.8;
+    }
+
+    /* Main */
+    .about-container {
+      max-width: 900px;
+      margin: 45px auto;
+      padding: 0 20px;
+    }
+
+    .about-card {
+      background: #fff;
+      padding: 45px;
+      border-radius: 5px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    .about-card h1 {
+      color: #073b6b;
+      font-size: 34px;
+      margin-bottom: 25px;
+    }
+
+    .about-card h2 {
+      color: #073b6b;
+      font-size: 22px;
+      margin-top: 35px;
+      margin-bottom: 12px;
+    }
+
+    .about-card p {
+      font-size: 15px;
+      margin-bottom: 15px;
+      color: #444;
+    }
+
+    /* Lists */
+    .about-list {
+      list-style: none;
+      padding: 0;
+      margin-top: 10px;
+    }
+
+    .about-list li {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .about-list li::before {
+      content: "•";
+      position: absolute;
+      left: 5px;
+      color: #c82333;
+      font-weight: bold;
+    }
+
+    .about-list strong {
+      color: #073b6b;
+    }
+
+    /* Footer */
+    .about-footer {
+      background: #09243c;
+      color: #fff;
+      text-align: center;
+      padding: 25px 15px;
+      font-size: 13px;
+      margin-top: 50px;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .about-header {
+        height: 62px;
+        padding: 0 20px;
+      }
+
+      .about-container {
+        margin: 25px auto;
+        padding: 0 15px;
+      }
+
+      .about-card {
+        padding: 28px 22px;
+      }
+
+      .about-card h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .about-card h2 {
+        font-size: 20px;
+        margin-top: 30px;
+      }
+
+      .about-card p,
+      .about-list li {
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="about-header">
+    <a href="index.html" class="back-button">
+      <i class="fa-solid fa-arrow-left"></i>
+      <span>Back</span>
+    </a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="about-container">
+
+    <section class="about-card">
+
+      <h1>About Us</h1>
+
+      <p>
+        Founded in 2015, FirstViewBank was built on a simple promise:
+        make banking clear, accessible, and reliable for everyday people
+        and businesses. In just over a decade, we've grown into a trusted
+        financial partner known for combining sound banking fundamentals
+        with modern convenience.
+      </p>
+
+      <h2>Our Mission</h2>
+
+      <p>
+        To provide innovative, reliable, and inclusive financial solutions
+        that empower our customers to save, invest, and grow with full
+        transparency and trust.
+      </p>
+
+      <h2>Our Vision</h2>
+
+      <p>
+        To be a leading name in banking, recognized for excellence in
+        service, innovation, and community impact.
+      </p>
+
+      <h2>Our Core Values</h2>
+
+      <ul class="about-list">
+        <li>
+          <strong>Integrity</strong> – Honest, accountable banking
+        </li>
+
+        <li>
+          <strong>Customer-Centricity</strong> – Your goals drive our service
+        </li>
+
+        <li>
+          <strong>Innovation</strong> – Constantly evolving to meet your needs
+        </li>
+
+        <li>
+          <strong>Security</strong> – Your money and data, protected
+        </li>
+
+        <li>
+          <strong>Community</strong> – Investing in the people we serve
+        </li>
+      </ul>
+
+      <h2>What We Offer</h2>
+
+      <ul class="about-list">
+        <li>
+          <strong>Checking Accounts</strong> — everyday banking made easy
+        </li>
+
+        <li>
+          <strong>Savings Accounts</strong> — grow your money securely
+        </li>
+
+        <li>
+          <strong>Investment Accounts</strong> — build long-term wealth
+        </li>
+
+        <li>
+          <strong>Credit Cards</strong> — flexible spending with rewards
+        </li>
+
+        <li>
+          <strong>Auto Loans</strong> — drive away with confidence
+        </li>
+
+        <li>
+          <strong>Mortgages</strong> — turn homeownership into reality
+        </li>
+      </ul>
+
+      <h2>Why Choose FirstViewBank</h2>
+
+      <p>
+        Since 2015, we've helped individuals and families bank smarter —
+        backed by strong security, personalized service, and a full range
+        of financial products under one roof.
+      </p>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="about-footer">
+    © 2026 Firstviewbank. All rights reserved.
+  </footer>
+
+</body>
+</html>
