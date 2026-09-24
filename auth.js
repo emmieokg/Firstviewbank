@@ -42,12 +42,13 @@ async function signUpUser() {
   const message =
     document.getElementById("signupMessage");
 
+  const button =
+    document.getElementById("signupButton");
+
 
   message.textContent = "";
   message.style.color = "#c82333";
 
-
-  // Check fields
 
   if (
     !accountType ||
@@ -58,92 +59,95 @@ async function signUpUser() {
     !password ||
     !confirmPassword
   ) {
-
     message.textContent =
       "Please complete all fields.";
-
     return;
   }
 
-
-  // Password length
 
   if (password.length < 8) {
-
     message.textContent =
       "Password must be at least 8 characters.";
-
     return;
   }
 
-
-  // Password confirmation
 
   if (password !== confirmPassword) {
-
     message.textContent =
       "Passwords do not match.";
-
     return;
   }
 
 
-  // Create Supabase Auth user
+  button.disabled = true;
+  button.textContent = "Creating Account...";
 
-  const { data, error } =
-    await supabaseClient.auth.signUp({
 
-      email: email,
+  try {
 
-      password: password,
+    const { data, error } =
+      await supabaseClient.auth.signUp({
 
-      options: {
+        email: email,
 
-        data: {
-          account_type: accountType,
-          first_name: firstName,
-          last_name: lastName,
-          date_of_birth: dateOfBirth
+        password: password,
+
+        options: {
+
+          data: {
+            account_type: accountType,
+            first_name: firstName,
+            last_name: lastName,
+            date_of_birth: dateOfBirth
+          }
+
         }
 
-      }
-
-    });
+      });
 
 
-  if (error) {
+    if (error) {
+      throw error;
+    }
+
+
+    /*
+      Supabase has created the Auth user
+      and sent the confirmation email.
+    */
+
+    sessionStorage.setItem(
+      "signupEmail",
+      email
+    );
+
+
+    message.style.color = "#137333";
 
     message.textContent =
-      error.message;
+      "Account created. Check your email for your verification code.";
 
-    return;
+
+    setTimeout(() => {
+
+      window.location.href =
+        "verify-email.html";
+
+    }, 1000);
+
+
+  } catch (error) {
+
+    console.error("Signup error:", error);
+
+    button.disabled = false;
+    button.textContent = "Create Account";
+
+    message.style.color = "#c82333";
+
+    message.textContent =
+      error.message || "Unable to create account.";
   }
-
-
-  /*
-    Save email temporarily in this browser
-    so the verification page knows where
-    the OTP belongs.
-  */
-
-  sessionStorage.setItem(
-    "signupEmail",
-    email
-  );
-
-
-  message.style.color = "#137333";
-
-  message.textContent =
-    "Verification code sent. Check your email.";
-
-
-  setTimeout(() => {
-
-    window.location.href =
-      "verify-email.html";
-
-  }, 800);
 }
 
 
