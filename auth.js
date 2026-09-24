@@ -42,6 +42,9 @@ async function signUpUser() {
   const message =
     document.getElementById("signupMessage");
 
+  const button =
+    document.getElementById("signupButton");
+
 
   message.textContent = "";
   message.style.color = "#c82333";
@@ -88,239 +91,63 @@ async function signUpUser() {
   }
 
 
-  // Create Supabase Auth user
+  button.disabled = true;
+  button.textContent = "Creating Account...";
 
-  const { data, error } =
-    await supabaseClient.auth.signUp({
 
-      email: email,
+  try {
 
-      password: password,
+    const { data, error } =
+      await supabaseClient.auth.signUp({
 
-      options: {
+        email: email,
 
-        data: {
-          account_type: accountType,
-          first_name: firstName,
-          last_name: lastName,
-          date_of_birth: dateOfBirth
+        password: password,
+
+        options: {
+
+          data: {
+            account_type: accountType,
+            first_name: firstName,
+            last_name: lastName,
+            date_of_birth: dateOfBirth
+          },
+
+          emailRedirectTo:
+            window.location.origin + "/login.html"
+
         }
 
-      }
-
-    });
+      });
 
 
-  if (error) {
-
-    message.textContent =
-      error.message;
-
-    return;
-  }
+    if (error) {
+      throw error;
+    }
 
 
-  /*
-    Save email temporarily in this browser
-    so the verification page knows where
-    the OTP belongs.
-  */
-
-  sessionStorage.setItem(
-    "signupEmail",
-    email
-  );
-
-
-  message.style.color = "#137333";
-
-  message.textContent =
-    "Verification code sent. Check your email.";
-
-
-  setTimeout(() => {
-
-    window.location.href =
-      "verify-email.html";
-
-  }, 800);
-}
-
-
-// ==========================================
-// VERIFY SIGNUP OTP
-// ==========================================
-
-async function verifySignupCode() {
-
-  const email =
-    sessionStorage.getItem("signupEmail");
-
-  const code =
-    document.getElementById("verificationCode")
-      .value
-      .trim();
-
-  const message =
-    document.getElementById("verificationMessage");
-
-
-  message.textContent = "";
-  message.style.color = "#c82333";
-
-
-  if (!email) {
-
-    window.location.href =
-      "signup.html";
-
-    return;
-  }
-
-
-  if (!/^\d{6}$/.test(code)) {
+    message.style.color = "#137333";
 
     message.textContent =
-      "Please enter the 6-digit verification code.";
-
-    return;
-  }
-
-
-  const { data, error } =
-    await supabaseClient.auth.verifyOtp({
-
-      email: email,
-
-      token: code,
-
-      type: "email"
-
-    });
-
-
-  if (error) {
-
-    message.textContent =
-      "Invalid or expired verification code.";
-
-    return;
-  }
-
-
-  message.style.color = "#137333";
-
-  message.textContent =
-    "Email verified successfully.";
-
-
-  sessionStorage.removeItem(
-    "signupEmail"
-  );
-
-
-  setTimeout(() => {
-
-    window.location.href =
-      "dashboard.html";
-
-  }, 1000);
-}
-
-
-// ==========================================
-// RESEND SUPABASE OTP
-// ==========================================
-
-async function resendSignupCode() {
-
-  const email =
-    sessionStorage.getItem("signupEmail");
-
-  const message =
-    document.getElementById("verificationMessage");
-
-  const button =
-    document.getElementById("resendButton");
-
-
-  if (!email) {
-
-    window.location.href =
-      "signup.html";
-
-    return;
-  }
-
-
-  button.disabled = true;
-
-  message.style.color = "#666";
-
-  message.textContent =
-    "Sending a new verification code...";
-
-
-  const { error } =
-    await supabaseClient.auth.resend({
-
-      type: "signup",
-
-      email: email
-
-    });
-
-
-  if (error) {
+      "Account created. Check your email and click the confirmation link to verify your account.";
 
     button.disabled = false;
+    button.textContent = "Create Account";
+
+
+  } catch (error) {
+
+    console.error("Signup error:", error);
+
+    button.disabled = false;
+    button.textContent = "Create Account";
 
     message.style.color = "#c82333";
 
     message.textContent =
-      error.message;
-
-    return;
+      error.message ||
+      "Unable to create account.";
   }
-
-
-  message.style.color = "#137333";
-
-  message.textContent =
-    "A new verification code has been sent to your email.";
-
-
-  /*
-    Prevent repeated requests immediately.
-    Supabase also has its own rate limits.
-  */
-
-  let seconds = 60;
-
-  button.textContent =
-    `Resend Code (${seconds})`;
-
-
-  const timer =
-    setInterval(() => {
-
-      seconds--;
-
-      button.textContent =
-        `Resend Code (${seconds})`;
-
-
-      if (seconds <= 0) {
-
-        clearInterval(timer);
-
-        button.disabled = false;
-
-        button.textContent =
-          "Resend Code";
-      }
-
-    }, 1000);
 }
 
 
