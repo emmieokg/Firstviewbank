@@ -3,14 +3,14 @@ const SUPABASE_URL =
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ";
-console.log("Supabase connected:", supabaseClient);
+
 
 const supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
-
+console.log("Supabase connected:", supabaseClient);
 
 // ==========================================
 // SIGN UP
