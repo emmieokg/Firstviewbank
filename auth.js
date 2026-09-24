@@ -17,6 +17,7 @@ const supabaseClient =
 // ==========================================
 
 async function signUpUser() {
+  alert("Signup function is working!");
 
   const accountType =
     document.getElementById("accountType").value;
