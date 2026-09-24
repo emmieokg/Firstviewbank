@@ -1,3 +1,4 @@
+alert("auth.js loaded");
 const SUPABASE_URL =
   "https://qdtjuvtcairdskrppnaa.supabase.co";
 
