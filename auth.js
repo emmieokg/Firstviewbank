@@ -151,6 +151,9 @@ window.location.href =
     message.textContent =
       error.message ||
       "Unable to create account.";
+      
+      emailRedirectTo:
+  window.location.origin + "/email-verified.html"
   }
 }
 
