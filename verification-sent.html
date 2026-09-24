@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Check Your Email | Firstviewbank</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    body {
+      background: #f5f7f9;
+    }
+
+    .verification-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 15px;
+    }
+
+    .verification-box {
+      width: 100%;
+      max-width: 450px;
+      background: white;
+      padding: 40px 35px;
+      border-radius: 10px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      text-align: center;
+    }
+
+    .verification-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 20px;
+      border-radius: 50%;
+      background: #eaf4fb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #073b6b;
+      font-size: 30px;
+    }
+
+    .verification-box h1 {
+      color: #073b6b;
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .verification-box p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+
+    .verification-email {
+      color: #073b6b;
+      font-weight: 700;
+      word-break: break-word;
+    }
+
+    .verification-note {
+      margin-top: 20px !important;
+      font-size: 13px !important;
+    }
+
+    .verification-button {
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: 25px;
+      padding: 14px;
+      border-radius: 10px;
+      background: #073b6b;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .verification-button:hover {
+      opacity: 0.9;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <main class="verification-page">
+
+    <div class="verification-box">
+
+      <div class="verification-icon">
+        ✓
+      </div>
+
+      <h1>Check Your Email</h1>
+
+      <p>
+        We've sent a verification link to:
+      </p>
+
+      <p
+        id="verificationEmail"
+        class="verification-email"
+      >
+        your email address
+      </p>
+
+      <p>
+        Click the link in the email to verify your account.
+      </p>
+
+      <p class="verification-note">
+        If you don't see the email, check your spam or junk folder.
+      </p>
+
+      <a
+        href="login.html"
+        class="verification-button"
+      >
+        Go to Sign In
+      </a>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    const email =
+      sessionStorage.getItem("signupEmail");
+
+    const emailElement =
+      document.getElementById("verificationEmail");
+
+    if (email) {
+
+      emailElement.textContent =
+        email;
+
+    }
+
+  </script>
+
+</body>
+
+</html>
