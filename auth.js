@@ -126,13 +126,17 @@ async function signUpUser() {
     }
 
 
-    message.style.color = "#137333";
+    sessionStorage.setItem(
 
-    message.textContent =
-      "Account created. Check your email and click the confirmation link to verify your account.";
+  "signupEmail",
 
-    button.disabled = false;
-    button.textContent = "Create Account";
+  email
+
+);
+
+window.location.href =
+
+  "verification-sent.html";
 
 
   } catch (error) {
