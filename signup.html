@@ -2,7 +2,10 @@
 <html lang="en">
 
 <head>
-
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -32,6 +35,25 @@
       border-radius: 10px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.12);
     }
+    
+    .back-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #073b6b;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 25px;
+}
+
+.back-home i {
+  font-size: 13px;
+}
+
+.back-home:hover {
+  opacity: 0.8;
+}
 
     .auth-box h1 {
       color: #073b6b;
@@ -121,11 +143,12 @@
 
     <div class="auth-box">
 
-      <h1>Create Account</h1>
+<a href="index.html" class="back-home">
+  <i class="fa-solid fa-arrow-left"></i>
+  Back to Homepage
+</a>
 
-      <p class="auth-subtitle">
-        Enter your information to get started.
-      </p>
+      <h1>Create Account</h1>
 
       <form onsubmit="event.preventDefault(); signUpUser();">
 
