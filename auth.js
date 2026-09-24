@@ -1,5 +1,5 @@
-const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_URL = "https://qdtjuvtcairdskrppnaa.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
@@ -17,7 +17,6 @@ async function signUpUser() {
   const firstName = document.getElementById("firstName").value.trim();
   const lastName = document.getElementById("lastName").value.trim();
   const dateOfBirth = document.getElementById("dateOfBirth").value;
-  const homeAddress = document.getElementById("homeAddress").value.trim();
   const email = document.getElementById("signupEmail").value.trim();
   const password = document.getElementById("signupPassword").value;
   const confirmPassword = document.getElementById("confirmPassword").value;
