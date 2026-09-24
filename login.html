@@ -80,6 +80,22 @@
       color: #075b91;
       font-weight: bold;
     }
+    .forgot-password {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.forgot-password a {
+  color: #075b91;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  color: #073b6b;
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -112,9 +128,11 @@
         </button>
         <div id="loginMessage" class="auth-message"></div>
       </form>
-      <a href="forgot-password.html" class="forgot-password">
-  Forgot Password?
-</a>
+      <div class="forgot-password">
+  <a href="forgot-password.html">
+    Forgot Password?
+  </a>
+</div>
       <div class="auth-footer">
         Don't have an account?
         <a href="signup.html">Create Account</a>
