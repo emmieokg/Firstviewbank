@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="style.css">
 
   <style>
+
     body {
       background: #f5f7f9;
     }
@@ -21,7 +23,7 @@
       justify-content: center;
       padding: 30px 15px;
     }
-     
+
     .auth-box {
       width: 100%;
       max-width: 450px;
@@ -40,7 +42,7 @@
     .required {
       color: #c82333;
       font-weight: 600;
-}
+    }
 
     .auth-subtitle {
       color: #666;
@@ -65,13 +67,11 @@
       background: white;
       color: #222;
     }
-  
-    .auth-box input[type="date"] {
-  width: 94%;
-  box-sizing: border-box;
 
-}
-    
+    .auth-box input[type="date"] {
+      width: 94%;
+    }
+
     .auth-button {
       width: 100%;
       margin-top: 25px;
@@ -86,6 +86,11 @@
 
     .auth-button:hover {
       opacity: 0.9;
+    }
+
+    .auth-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
     }
 
     .auth-message {
@@ -105,7 +110,9 @@
       color: #075b91;
       font-weight: bold;
     }
+
   </style>
+
 </head>
 
 <body>
@@ -116,19 +123,43 @@
 
       <h1>Create Account</h1>
 
+      <p class="auth-subtitle">
+        Enter your information to get started.
+      </p>
+
       <form onsubmit="event.preventDefault(); signUpUser();">
 
-        <!-- Account Type -->
-        <label for="accountType">Account Type: <span class="required">*</span></label>
+        <label for="accountType">
+          Account Type:
+          <span class="required">*</span>
+        </label>
+
         <select id="accountType" required>
-          <option value="" disabled selected>Select account type</option>
-          <option value="checking">Checking</option>
-          <option value="savings">Savings</option>
-          <option value="investment">Investment</option>
+
+          <option value="" disabled selected>
+            Select account type
+          </option>
+
+          <option value="checking">
+            Checking
+          </option>
+
+          <option value="savings">
+            Savings
+          </option>
+
+          <option value="investment">
+            Investment
+          </option>
+
         </select>
 
-        <!-- First Name -->
-        <label for="firstName">First Name: <span class="required">*</span></label>
+
+        <label for="firstName">
+          First Name:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="text"
           id="firstName"
@@ -136,8 +167,12 @@
           required
         >
 
-        <!-- Last Name -->
-        <label for="lastName">Last Name: <span class="required">*</span></label>
+
+        <label for="lastName">
+          Last Name:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="text"
           id="lastName"
@@ -145,8 +180,12 @@
           required
         >
 
-        <!-- Date of Birth -->
-        <label for="dateOfBirth">Date of Birth: <span class="required">*</span></label>
+
+        <label for="dateOfBirth">
+          Date of Birth:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="date"
           id="dateOfBirth"
@@ -154,18 +193,12 @@
           required
         >
 
-        <!-- Home Address -->
-        <label for="homeAddress">Home Address: <span class="required">*</span></label>
-        <input
-          type="text"
-          id="homeAddress"
-          autocomplete="street-address"
-          placeholder="Enter your home address"
-          required
-        >
 
-        <!-- Email -->
-        <label for="signupEmail">Email Address: <span class="required">*</span></label>
+        <label for="signupEmail">
+          Email Address:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="email"
           id="signupEmail"
@@ -173,8 +206,12 @@
           required
         >
 
-        <!-- Password -->
-        <label for="signupPassword">Password: <span class="required">*</span></label>
+
+        <label for="signupPassword">
+          Password:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="password"
           id="signupPassword"
@@ -183,8 +220,12 @@
           required
         >
 
-        <!-- Confirm Password -->
-        <label for="confirmPassword">Confirm Password: <span class="required">*</span></label>
+
+        <label for="confirmPassword">
+          Confirm Password:
+          <span class="required">*</span>
+        </label>
+
         <input
           type="password"
           id="confirmPassword"
@@ -193,25 +234,42 @@
           required
         >
 
-        <button type="submit" class="auth-button">
+
+        <button
+          type="submit"
+          class="auth-button"
+          id="signupButton"
+        >
           Create Account
         </button>
 
-        <div id="signupMessage" class="auth-message"></div>
+        <div
+          id="signupMessage"
+          class="auth-message"
+        ></div>
 
       </form>
 
+
       <div class="auth-footer">
+
         Already have an account?
-        <a href="login.html">Sign In</a>
+
+        <a href="login.html">
+          Sign In
+        </a>
+
       </div>
 
     </div>
 
   </main>
 
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="js/auth.js"></script>
 
 </body>
+
 </html>
