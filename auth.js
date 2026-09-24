@@ -12,10 +12,6 @@ const supabaseClient =
   );
 
 
-// ==================================================
-// EDGE FUNCTION URL
-// ==================================================
-
 const SIGNUP_FUNCTION_URL =
   SUPABASE_URL +
   "/functions/v1/signup-verification";
@@ -59,10 +55,6 @@ async function signUpUser() {
   message.style.color = "#c82333";
 
 
-  // ----------------------------------------------
-  // Required fields
-  // ----------------------------------------------
-
   if (
     !accountType ||
     !firstName ||
@@ -80,10 +72,6 @@ async function signUpUser() {
   }
 
 
-  // ----------------------------------------------
-  // Password length
-  // ----------------------------------------------
-
   if (password.length < 8) {
 
     message.textContent =
@@ -92,10 +80,6 @@ async function signUpUser() {
     return;
   }
 
-
-  // ----------------------------------------------
-  // Password confirmation
-  // ----------------------------------------------
 
   if (password !== confirmPassword) {
 
@@ -113,33 +97,34 @@ async function signUpUser() {
   try {
 
     const response =
-      await fetch(SIGNUP_FUNCTION_URL, {
+      await fetch(
+        SIGNUP_FUNCTION_URL,
+        {
+          method: "POST",
 
-        method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+          body: JSON.stringify({
 
-        body: JSON.stringify({
+            action: "send-code",
 
-          action: "send-code",
+            accountType: accountType,
 
-          accountType: accountType,
+            firstName: firstName,
 
-          firstName: firstName,
+            lastName: lastName,
 
-          lastName: lastName,
+            dateOfBirth: dateOfBirth,
 
-          dateOfBirth: dateOfBirth,
+            email: email,
 
-          email: email,
+            password: password
 
-          password: password
-
-        })
-
-      });
+          })
+        }
+      );
 
 
     const result =
@@ -154,9 +139,6 @@ async function signUpUser() {
       );
     }
 
-
-    // Save only the email locally.
-    // The password is NOT stored in localStorage.
 
     sessionStorage.setItem(
       "pendingSignupEmail",
@@ -179,6 +161,7 @@ async function signUpUser() {
       error.message;
 
     button.disabled = false;
+
     button.textContent =
       "Create Account";
   }
@@ -215,7 +198,8 @@ async function verifySignupCode() {
 
 
   message.textContent = "";
-  message.style.color = "#c82333";
+  message.style.color =
+    "#c82333";
 
 
   if (!email) {
@@ -237,31 +221,33 @@ async function verifySignupCode() {
 
 
   button.disabled = true;
-  button.textContent = "Verifying...";
+  button.textContent =
+    "Verifying...";
 
 
   try {
 
     const response =
-      await fetch(SIGNUP_FUNCTION_URL, {
+      await fetch(
+        SIGNUP_FUNCTION_URL,
+        {
+          method: "POST",
 
-        method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+          body: JSON.stringify({
 
-        body: JSON.stringify({
+            action: "verify-code",
 
-          action: "verify-code",
+            email: email,
 
-          email: email,
+            code: code
 
-          code: code
-
-        })
-
-      });
+          })
+        }
+      );
 
 
     const result =
@@ -272,58 +258,7 @@ async function verifySignupCode() {
 
       throw new Error(
         result.error ||
-        "Invalid verification code."
-      );
-    }
-
-
-    // ----------------------------------------------
-    // Code verified.
-    // Now create the real Supabase Auth account.
-    // ----------------------------------------------
-
-    const password =
-      result.password;
-
-    const accountData =
-      result.accountData;
-
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.signUp({
-
-        email: email,
-
-        password: password,
-
-        options: {
-
-          data: {
-            account_type:
-              accountData.account_type,
-
-            first_name:
-              accountData.first_name,
-
-            last_name:
-              accountData.last_name,
-
-            date_of_birth:
-              accountData.date_of_birth
-          }
-
-        }
-
-      });
-
-
-    if (error) {
-
-      throw new Error(
-        error.message
+        "Unable to verify your email."
       );
     }
 
@@ -340,25 +275,12 @@ async function verifySignupCode() {
       "Email verified. Your account has been created.";
 
 
-    // ----------------------------------------------
-    // Email confirmation is already handled by
-    // our verification process.
-    //
-    // If Supabase still requires confirmation,
-    // the user may need to verify through the
-    // normal Auth confirmation flow.
-    // ----------------------------------------------
-
-    if (data.session) {
-
-      window.location.href =
-        "dashboard.html";
-
-    } else {
+    setTimeout(function () {
 
       window.location.href =
         "login.html";
-    }
+
+    }, 1000);
 
 
   } catch (error) {
@@ -368,10 +290,14 @@ async function verifySignupCode() {
       error
     );
 
+    message.style.color =
+      "#c82333";
+
     message.textContent =
       error.message;
 
     button.disabled = false;
+
     button.textContent =
       "Verify Email";
   }
@@ -380,7 +306,7 @@ async function verifySignupCode() {
 
 
 // ==================================================
-// RESEND CODE
+// RESEND VERIFICATION CODE
 // ==================================================
 
 async function resendSignupCode() {
@@ -411,29 +337,31 @@ async function resendSignupCode() {
 
 
   button.disabled = true;
-  button.textContent = "Sending...";
+  button.textContent =
+    "Sending...";
 
 
   try {
 
     const response =
-      await fetch(SIGNUP_FUNCTION_URL, {
+      await fetch(
+        SIGNUP_FUNCTION_URL,
+        {
+          method: "POST",
 
-        method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
 
-        headers: {
-          "Content-Type": "application/json"
-        },
+          body: JSON.stringify({
 
-        body: JSON.stringify({
+            action: "resend-code",
 
-          action: "resend-code",
+            email: email
 
-          email: email
-
-        })
-
-      });
+          })
+        }
+      );
 
 
     const result =
@@ -444,7 +372,7 @@ async function resendSignupCode() {
 
       throw new Error(
         result.error ||
-        "Unable to resend code."
+        "Unable to resend the code."
       );
     }
 
@@ -464,9 +392,11 @@ async function resendSignupCode() {
     message.textContent =
       error.message;
 
+
   } finally {
 
     button.disabled = false;
+
     button.textContent =
       "Resend Code";
   }
@@ -475,7 +405,7 @@ async function resendSignupCode() {
 
 
 // ==================================================
-// SHOW EMAIL ON VERIFICATION PAGE
+// DISPLAY EMAIL ON VERIFICATION PAGE
 // ==================================================
 
 document.addEventListener(
@@ -531,6 +461,7 @@ async function signInUser() {
 
 
   message.textContent = "";
+
   message.style.color =
     "#c82333";
 
@@ -631,7 +562,7 @@ async function logoutUser() {
 
 
 // ==================================================
-// SHOW USER INFORMATION
+// LOAD USER INFORMATION
 // ==================================================
 
 async function loadUserInformation() {
