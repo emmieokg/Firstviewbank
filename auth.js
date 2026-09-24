@@ -12,14 +12,9 @@ const supabaseClient =
   );
 
 
-const SIGNUP_FUNCTION_URL =
-  SUPABASE_URL +
-  "/functions/v1/signup-verification";
-
-
-// ==================================================
+// ==========================================
 // SIGN UP
-// ==================================================
+// ==========================================
 
 async function signUpUser() {
 
@@ -47,13 +42,12 @@ async function signUpUser() {
   const message =
     document.getElementById("signupMessage");
 
-  const button =
-    document.getElementById("signupButton");
-
 
   message.textContent = "";
   message.style.color = "#c82333";
 
+
+  // Check fields
 
   if (
     !accountType ||
@@ -72,6 +66,8 @@ async function signUpUser() {
   }
 
 
+  // Password length
+
   if (password.length < 8) {
 
     message.textContent =
@@ -80,6 +76,8 @@ async function signUpUser() {
     return;
   }
 
+
+  // Password confirmation
 
   if (password !== confirmPassword) {
 
@@ -90,122 +88,91 @@ async function signUpUser() {
   }
 
 
-  button.disabled = true;
-  button.textContent = "Sending Code...";
+  // Create Supabase Auth user
 
+  const { data, error } =
+    await supabaseClient.auth.signUp({
 
-  try {
+      email: email,
 
-    const response =
-      await fetch(
-        SIGNUP_FUNCTION_URL,
-        {
-          method: "POST",
+      password: password,
 
-          headers: {
-            "Content-Type": "application/json"
-          },
+      options: {
 
-          body: JSON.stringify({
-
-            action: "send-code",
-
-            accountType: accountType,
-
-            firstName: firstName,
-
-            lastName: lastName,
-
-            dateOfBirth: dateOfBirth,
-
-            email: email,
-
-            password: password
-
-          })
+        data: {
+          account_type: accountType,
+          first_name: firstName,
+          last_name: lastName,
+          date_of_birth: dateOfBirth
         }
-      );
+
+      }
+
+    });
 
 
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.error ||
-        "Unable to send verification code."
-      );
-    }
-
-
-    sessionStorage.setItem(
-      "pendingSignupEmail",
-      email
-    );
-
-
-    window.location.href =
-      "verify-email.html";
-
-
-  } catch (error) {
-
-    console.error(
-      "Signup error:",
-      error
-    );
+  if (error) {
 
     message.textContent =
       error.message;
 
-    button.disabled = false;
-
-    button.textContent =
-      "Create Account";
+    return;
   }
+
+
+  /*
+    Save email temporarily in this browser
+    so the verification page knows where
+    the OTP belongs.
+  */
+
+  sessionStorage.setItem(
+    "signupEmail",
+    email
+  );
+
+
+  message.style.color = "#137333";
+
+  message.textContent =
+    "Verification code sent. Check your email.";
+
+
+  setTimeout(() => {
+
+    window.location.href =
+      "verify-email.html";
+
+  }, 800);
 }
 
 
-
-// ==================================================
-// VERIFY SIGNUP CODE
-// ==================================================
+// ==========================================
+// VERIFY SIGNUP OTP
+// ==========================================
 
 async function verifySignupCode() {
 
   const email =
-    sessionStorage.getItem(
-      "pendingSignupEmail"
-    );
+    sessionStorage.getItem("signupEmail");
 
   const code =
-    document
-      .getElementById("verificationCode")
+    document.getElementById("verificationCode")
       .value
       .trim();
 
   const message =
-    document.getElementById(
-      "verificationMessage"
-    );
-
-  const button =
-    document.getElementById(
-      "verifyButton"
-    );
+    document.getElementById("verificationMessage");
 
 
   message.textContent = "";
-  message.style.color =
-    "#c82333";
+  message.style.color = "#c82333";
 
 
   if (!email) {
 
-    message.textContent =
-      "Your signup session has expired. Please start again.";
+    window.location.href =
+      "signup.html";
 
     return;
   }
@@ -220,250 +187,164 @@ async function verifySignupCode() {
   }
 
 
-  button.disabled = true;
-  button.textContent =
-    "Verifying...";
+  const { data, error } =
+    await supabaseClient.auth.verifyOtp({
+
+      email: email,
+
+      token: code,
+
+      type: "email"
+
+    });
 
 
-  try {
-
-    const response =
-      await fetch(
-        SIGNUP_FUNCTION_URL,
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json"
-          },
-
-          body: JSON.stringify({
-
-            action: "verify-code",
-
-            email: email,
-
-            code: code
-
-          })
-        }
-      );
-
-
-    const result =
-      await response.json();
-
-
-    if (!response.ok) {
-
-      throw new Error(
-        result.error ||
-        "Unable to verify your email."
-      );
-    }
-
-
-    sessionStorage.removeItem(
-      "pendingSignupEmail"
-    );
-
-
-    message.style.color =
-      "#137333";
+  if (error) {
 
     message.textContent =
-      "Email verified. Your account has been created.";
+      "Invalid or expired verification code.";
 
-
-    setTimeout(function () {
-
-      window.location.href =
-        "login.html";
-
-    }, 1000);
-
-
-  } catch (error) {
-
-    console.error(
-      "Verification error:",
-      error
-    );
-
-    message.style.color =
-      "#c82333";
-
-    message.textContent =
-      error.message;
-
-    button.disabled = false;
-
-    button.textContent =
-      "Verify Email";
+    return;
   }
+
+
+  message.style.color = "#137333";
+
+  message.textContent =
+    "Email verified successfully.";
+
+
+  sessionStorage.removeItem(
+    "signupEmail"
+  );
+
+
+  setTimeout(() => {
+
+    window.location.href =
+      "dashboard.html";
+
+  }, 1000);
 }
 
 
-
-// ==================================================
-// RESEND VERIFICATION CODE
-// ==================================================
+// ==========================================
+// RESEND SUPABASE OTP
+// ==========================================
 
 async function resendSignupCode() {
 
   const email =
-    sessionStorage.getItem(
-      "pendingSignupEmail"
-    );
+    sessionStorage.getItem("signupEmail");
 
   const message =
-    document.getElementById(
-      "verificationMessage"
-    );
+    document.getElementById("verificationMessage");
 
   const button =
-    document.getElementById(
-      "resendButton"
-    );
+    document.getElementById("resendButton");
 
 
   if (!email) {
 
-    message.textContent =
-      "Your signup session has expired. Please start again.";
+    window.location.href =
+      "signup.html";
 
     return;
   }
 
 
   button.disabled = true;
-  button.textContent =
-    "Sending...";
+
+  message.style.color = "#666";
+
+  message.textContent =
+    "Sending a new verification code...";
 
 
-  try {
+  const { error } =
+    await supabaseClient.auth.resend({
 
-    const response =
-      await fetch(
-        SIGNUP_FUNCTION_URL,
-        {
-          method: "POST",
+      type: "signup",
 
-          headers: {
-            "Content-Type": "application/json"
-          },
+      email: email
 
-          body: JSON.stringify({
-
-            action: "resend-code",
-
-            email: email
-
-          })
-        }
-      );
+    });
 
 
-    const result =
-      await response.json();
+  if (error) {
 
+    button.disabled = false;
 
-    if (!response.ok) {
-
-      throw new Error(
-        result.error ||
-        "Unable to resend the code."
-      );
-    }
-
-
-    message.style.color =
-      "#137333";
-
-    message.textContent =
-      "A new verification code has been sent.";
-
-
-  } catch (error) {
-
-    message.style.color =
-      "#c82333";
+    message.style.color = "#c82333";
 
     message.textContent =
       error.message;
 
-
-  } finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "Resend Code";
+    return;
   }
+
+
+  message.style.color = "#137333";
+
+  message.textContent =
+    "A new verification code has been sent to your email.";
+
+
+  /*
+    Prevent repeated requests immediately.
+    Supabase also has its own rate limits.
+  */
+
+  let seconds = 60;
+
+  button.textContent =
+    `Resend Code (${seconds})`;
+
+
+  const timer =
+    setInterval(() => {
+
+      seconds--;
+
+      button.textContent =
+        `Resend Code (${seconds})`;
+
+
+      if (seconds <= 0) {
+
+        clearInterval(timer);
+
+        button.disabled = false;
+
+        button.textContent =
+          "Resend Code";
+      }
+
+    }, 1000);
 }
 
 
-
-// ==================================================
-// DISPLAY EMAIL ON VERIFICATION PAGE
-// ==================================================
-
-document.addEventListener(
-  "DOMContentLoaded",
-  function () {
-
-    const email =
-      sessionStorage.getItem(
-        "pendingSignupEmail"
-      );
-
-    const emailElement =
-      document.getElementById(
-        "verificationEmail"
-      );
-
-
-    if (
-      emailElement &&
-      email
-    ) {
-
-      emailElement.textContent =
-        email;
-    }
-
-  }
-);
-
-
-
-// ==================================================
+// ==========================================
 // SIGN IN
-// ==================================================
+// ==========================================
 
 async function signInUser() {
 
   const email =
-    document
-      .getElementById("loginEmail")
+    document.getElementById("loginEmail")
       .value
       .trim();
 
   const password =
-    document
-      .getElementById("loginPassword")
+    document.getElementById("loginPassword")
       .value;
 
   const message =
-    document.getElementById(
-      "loginMessage"
-    );
+    document.getElementById("loginMessage");
 
 
   message.textContent = "";
-
-  message.style.color =
-    "#c82333";
+  message.style.color = "#c82333";
 
 
   if (!email || !password) {
@@ -475,21 +356,35 @@ async function signInUser() {
   }
 
 
-  const {
-    data,
-    error
-  } =
-    await supabaseClient.auth
-      .signInWithPassword({
+  const { data, error } =
+    await supabaseClient.auth.signInWithPassword({
 
-        email: email,
+      email: email,
 
-        password: password
+      password: password
 
-      });
+    });
 
 
   if (error) {
+
+    if (
+      error.message
+        .toLowerCase()
+        .includes("email not confirmed")
+    ) {
+
+      sessionStorage.setItem(
+        "signupEmail",
+        email
+      );
+
+      message.textContent =
+        "Please verify your email before signing in.";
+
+      return;
+    }
+
 
     message.textContent =
       "Invalid email or password.";
@@ -506,17 +401,14 @@ async function signInUser() {
 }
 
 
-
-// ==================================================
+// ==========================================
 // CHECK AUTHENTICATION
-// ==================================================
+// ==========================================
 
 async function requireAuth() {
 
   const {
-    data: {
-      user
-    }
+    data: { user }
   } =
     await supabaseClient.auth.getUser();
 
@@ -534,16 +426,13 @@ async function requireAuth() {
 }
 
 
-
-// ==================================================
+// ==========================================
 // LOG OUT
-// ==================================================
+// ==========================================
 
 async function logoutUser() {
 
-  const {
-    error
-  } =
+  const { error } =
     await supabaseClient.auth.signOut();
 
 
@@ -560,10 +449,9 @@ async function logoutUser() {
 }
 
 
-
-// ==================================================
+// ==========================================
 // LOAD USER INFORMATION
-// ==================================================
+// ==========================================
 
 async function loadUserInformation() {
 
@@ -575,41 +463,29 @@ async function loadUserInformation() {
 
 
   const firstName =
-    user.user_metadata?.first_name ||
-    "";
+    user.user_metadata?.first_name || "";
 
   const lastName =
-    user.user_metadata?.last_name ||
-    "";
+    user.user_metadata?.last_name || "";
 
   const accountType =
-    user.user_metadata?.account_type ||
-    "";
+    user.user_metadata?.account_type || "";
 
   const dateOfBirth =
-    user.user_metadata?.date_of_birth ||
-    "";
+    user.user_metadata?.date_of_birth || "";
 
 
   const nameElement =
-    document.getElementById(
-      "userName"
-    );
+    document.getElementById("userName");
 
   const emailElement =
-    document.getElementById(
-      "userEmail"
-    );
+    document.getElementById("userEmail");
 
   const accountTypeElement =
-    document.getElementById(
-      "accountType"
-    );
+    document.getElementById("accountType");
 
   const dateOfBirthElement =
-    document.getElementById(
-      "dateOfBirth"
-    );
+    document.getElementById("dateOfBirth");
 
 
   if (nameElement) {
@@ -641,5 +517,4 @@ async function loadUserInformation() {
       dateOfBirth ||
       "Not specified";
   }
-
 }
