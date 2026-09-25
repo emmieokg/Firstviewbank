@@ -99,6 +99,18 @@
 
       </div>
 
+      <div class="info-box">
+
+  <span>
+    Account type
+  </span>
+
+  <strong id="profileAccountType">
+    —
+  </strong>
+
+</div>
+
     </div>
 
   </section>
@@ -289,6 +301,9 @@
 
   document.getElementById("profileDateOfBirth").textContent =
     metadata.date_of_birth || "—";
+    
+    document.getElementById("profileAccountType").textContent =
+  metadata.account_type || "—";
 
 })();
 
