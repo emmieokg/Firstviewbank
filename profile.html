@@ -117,106 +117,128 @@
     </p>
 
 
-    <form
-      id="changePasswordForm"
-      onsubmit="changePassword(event)"
+  <form
+  id="changePasswordForm"
+  onsubmit="changePassword(event)"
+>
+
+  <!-- CURRENT PASSWORD -->
+
+  <div class="field full">
+
+    <label for="currentPassword">
+      Current password
+    </label>
+
+    <div class="password-input">
+
+      <input
+        type="password"
+        id="currentPassword"
+        autocomplete="current-password"
+        required
+      >
+
+      <button
+        type="button"
+        onclick="togglePassword('currentPassword', this)"
+        aria-label="Show password"
+      >
+        <i class="fa-regular fa-eye"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- NEW PASSWORD -->
+
+  <div class="field full">
+
+    <label for="newPassword">
+      New password
+    </label>
+
+    <div class="password-input">
+
+      <input
+        type="password"
+        id="newPassword"
+        autocomplete="new-password"
+        minlength="8"
+        required
+      >
+
+      <button
+        type="button"
+        onclick="togglePassword('newPassword', this)"
+        aria-label="Show password"
+      >
+        <i class="fa-regular fa-eye"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- CONFIRM NEW PASSWORD -->
+
+  <div class="field full">
+
+    <label for="confirmNewPassword">
+      Confirm new password
+    </label>
+
+    <div class="password-input">
+
+      <input
+        type="password"
+        id="confirmNewPassword"
+        autocomplete="new-password"
+        minlength="8"
+        required
+      >
+
+      <button
+        type="button"
+        onclick="togglePassword('confirmNewPassword', this)"
+        aria-label="Show password"
+      >
+        <i class="fa-regular fa-eye"></i>
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="passwordMessage"
+    class="password-message"
+  ></div>
+
+
+  <div class="form-actions">
+
+    <button
+      class="primary-btn"
+      type="submit"
+      id="changePasswordButton"
     >
+      Change Password
+    </button>
 
-      <div class="password-input">
+  </div>
 
-  <input
-    type="password"
-    id="currentPassword"
-    autocomplete="current-password"
-    required
-  >
-
-  <button
-    type="button"
-    onclick="togglePassword('currentPassword', this)"
-    aria-label="Show password"
-  >
-    <i class="fa-regular fa-eye"></i>
-  </button>
-
-</div>
-
-<div class="password-input">
-
-  <input
-    type="password"
-    id="newPassword"
-    autocomplete="new-password"
-    minlength="8"
-    required
-  >
-
-  <button
-    type="button"
-    onclick="togglePassword('newPassword', this)"
-    aria-label="Show password"
-  >
-    <i class="fa-regular fa-eye"></i>
-  </button>
-
-</div>
-
-      <div class="field full">
-
-        <label for="confirmNewPassword">
-          Confirm new password
-        </label>
-
-        <div class="password-input">
-
-  <input
-    type="password"
-    id="confirmNewPassword"
-    autocomplete="new-password"
-    minlength="8"
-    required
-  >
-
-  <button
-    type="button"
-    onclick="togglePassword('confirmNewPassword', this)"
-    aria-label="Show password"
-  >
-    <i class="fa-regular fa-eye"></i>
-  </button>
-      </div>
-
-
-      <div
-        id="passwordMessage"
-        class="password-message"
-      ></div>
-
-
-      <div class="form-actions">
-
-        <button
-          class="primary-btn"
-          type="submit"
-          id="changePasswordButton"
-        >
-          Change Password
-        </button>
-
-      </div>
-
-    </form>
-
+</form>
   </section>
 
 
   <!-- ACCOUNT ACTIONS -->
 
   <section class="card">
-
-    <h2 class="card-title">
-      Account Actions
-    </h2>
 
 
     <div class="form-actions">
