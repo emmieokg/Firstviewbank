@@ -204,17 +204,13 @@ textarea {
 }
 
 .secondary-btn {
-  border: 1px solid #073b6b;
-  border-radius: 4px;
-
-  background: #fff;
-  color: #073b6b;
-
+  border-radius:6px;
+  background: #c82333;
+  color: #fff;
+  border: none;
   padding: 12px 20px;
-
   font-weight: bold;
   cursor: pointer;
-
   display: inline-block;
 }
 
