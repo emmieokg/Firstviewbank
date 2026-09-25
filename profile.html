@@ -21,7 +21,7 @@
 
 </head>
 
-</header>
+<body>
 
 
 <main class="page-wrap">
@@ -37,10 +37,7 @@
   </h1>
 
 
-  <p class="page-subtitle">
-    View the information associated with your Firstviewbank account.
-  </p>
-
+  <!-- PERSONAL INFORMATION -->
 
   <section class="card">
 
@@ -93,11 +90,11 @@
       <div class="info-box">
 
         <span>
-          Account
+          DOB
         </span>
 
-        <strong>
-          Firstviewbank Customer
+        <strong id="profileDateOfBirth">
+          —
         </strong>
 
       </div>
@@ -106,6 +103,108 @@
 
   </section>
 
+
+  <!-- CHANGE PASSWORD -->
+
+  <section class="card">
+
+    <h2 class="card-title">
+      Change Password
+    </h2>
+
+    <p class="page-subtitle">
+      Update the password used to sign in to your account.
+    </p>
+
+
+    <form
+      id="changePasswordForm"
+      onsubmit="changePassword(event)"
+    >
+
+      <div class="field full">
+
+        <label for="currentPassword">
+          Current password
+        </label>
+
+        <input
+          type="password"
+          id="currentPassword"
+          autocomplete="current-password"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="newPassword">
+          New password
+        </label>
+
+        <input
+          type="password"
+          id="newPassword"
+          autocomplete="new-password"
+          minlength="8"
+          required
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label for="confirmNewPassword">
+          Confirm new password
+        </label>
+
+        <div class="password-input">
+
+  <input
+    type="password"
+    id="confirmNewPassword"
+    autocomplete="new-password"
+    minlength="8"
+    required
+  >
+
+  <button
+    type="button"
+    onclick="togglePassword('confirmNewPassword', this)"
+    aria-label="Show password"
+  >
+    <i class="fa-regular fa-eye"></i>
+  </button>
+      </div>
+
+
+      <div
+        id="passwordMessage"
+        class="password-message"
+      ></div>
+
+
+      <div class="form-actions">
+
+        <button
+          class="primary-btn"
+          type="submit"
+          id="changePasswordButton"
+        >
+          Change Password
+        </button>
+
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- ACCOUNT ACTIONS -->
 
   <section class="card">
 
@@ -160,9 +259,246 @@
   document.getElementById("profileEmail").textContent =
     user.email || "—";
 
+  document.getElementById("profileDateOfBirth").textContent =
+    metadata.date_of_birth || "—";
+
 })();
 
+
+async function changePassword(event) {
+
+  event.preventDefault();
+
+  const currentPassword =
+    document.getElementById("currentPassword").value;
+
+  const newPassword =
+    document.getElementById("newPassword").value;
+
+  const confirmNewPassword =
+    document.getElementById("confirmNewPassword").value;
+
+  const message =
+    document.getElementById("passwordMessage");
+
+  const button =
+    document.getElementById("changePasswordButton");
+
+
+  message.textContent = "";
+  message.style.color = "#c82333";
+
+
+  if (newPassword.length < 8) {
+
+    message.textContent =
+      "New password must be at least 8 characters.";
+
+    return;
+
+  }
+
+
+  if (newPassword !== confirmNewPassword) {
+
+    message.textContent =
+      "New passwords do not match.";
+
+    return;
+
+  }
+
+
+  button.disabled = true;
+  button.textContent = "Changing Password...";
+
+
+  try {
+
+    const {
+      data: {
+        user
+      }
+    } = await supabaseClient.auth.getUser();
+
+
+    if (!user || !user.email) {
+
+      throw new Error(
+        "Unable to verify your account."
+      );
+
+    }
+
+
+    /*
+      Verify the current password
+      before changing it.
+    */
+
+    const {
+      error: signInError
+    } = await supabaseClient.auth.signInWithPassword({
+
+      email: user.email,
+
+      password: currentPassword
+
+    });
+
+
+    if (signInError) {
+
+      throw new Error(
+        "Current password is incorrect."
+      );
+
+    }
+
+
+    /*
+      Update the password.
+    */
+
+    const {
+      error: updateError
+    } = await supabaseClient.auth.updateUser({
+
+      password: newPassword
+
+    });
+
+
+    if (updateError) {
+
+      throw updateError;
+
+    }
+
+
+    message.style.color = "#137333";
+
+    message.textContent =
+      "Your password has been changed successfully.";
+
+
+    document
+      .getElementById("changePasswordForm")
+      .reset();
+
+
+  } catch (error) {
+
+    console.error(
+      "Password change error:",
+      error
+    );
+
+    message.style.color = "#c82333";
+
+    message.textContent =
+      error.message ||
+      "Unable to change your password.";
+
+  } finally {
+
+    button.disabled = false;
+    button.textContent = "Change Password";
+
+  }
+
+function togglePassword(inputId, button) {
+
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector("i");
+
+  if (input.type === "password") {
+
+    input.type = "text";
+
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+
+    button.setAttribute("aria-label", "Hide password");
+
+  } else {
+
+    input.type = "password";
+
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+
+    button.setAttribute("aria-label", "Show password");
+
+  }
+
+}
+
 </script>
+
+
+<style>
+
+.password-message {
+  min-height: 20px;
+  margin-top: 10px;
+  font-size: 13px;
+}
+.password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 45px !important;
+}
+
+.password-input button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+
+  color: #666;
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+.password-input button:hover {
+  color: #073b6b;
+}
+
+#changePasswordForm .field {
+  margin-bottom: 20px;
+}
+
+#changePasswordForm .field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#changePasswordForm input {
+  width: 100%;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background: #fff;
+  color: #222;
+  font-size: 15px;
+}
+
+#changePasswordForm input:focus {
+  outline: none;
+  border-color: #073b6b;
+}
+
+</style>
+
 
 </body>
 </html>
