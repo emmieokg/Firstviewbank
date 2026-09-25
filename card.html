@@ -10,7 +10,7 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Credit Card | Firstviewbank</title>
+  <title>Cards | Firstviewbank</title>
 
   <link
     rel="stylesheet"
@@ -21,9 +21,7 @@
 
 </head>
 
-
-</header>
-
+<body>
 
 <main class="page-wrap">
 
@@ -32,110 +30,70 @@
     Back to Dashboard
   </a>
 
-
   <p class="page-subtitle">
-    View your card information, available credit and activity.
+    Manage your Firstviewbank cards.
   </p>
 
 
-  <section class="card">
+  <section class="card no-card-card">
 
-    <div class="account-summary">
-
-      <div>
-
-        <small>
-          Current balance
-        </small>
-
-        <div class="account-balance">
-          $0.00
-        </div>
-
-        <small>
-          Card ending ••••
-        </small>
-
-      </div>
-
-
-      <a
-        href="bills.html"
-        class="summary-action"
-      >
-        Pay Card
-      </a>
-
+    <div class="no-card-icon">
+      <i class="fa-regular fa-credit-card"></i>
     </div>
-
-
-    <div class="profile-grid">
-
-      <div class="info-box">
-
-        <span>
-          Available credit
-        </span>
-
-        <strong>
-          $0.00
-        </strong>
-
-      </div>
-
-
-      <div class="info-box">
-
-        <span>
-          Payment due
-        </span>
-
-        <strong>
-          $0.00
-        </strong>
-
-      </div>
-
-
-      <div class="info-box">
-
-        <span>
-          Minimum payment
-        </span>
-
-        <strong>
-          $0.00
-        </strong>
-
-      </div>
-
-
-      <div class="info-box">
-
-        <span>
-          Status
-        </span>
-
-        <strong>
-          Active
-        </strong>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section class="card">
 
     <h2 class="card-title">
-      Card Activity
+      You don’t have a card yet.
     </h2>
 
-    <div class="empty">
-      No card transactions to display.
-    </div>
+    <p class="no-card-text">
+      Choose a card type below to submit a request.
+    </p>
+
+
+    <form
+      onsubmit="
+        event.preventDefault();
+        alert('Your card request has been submitted for review.');
+      "
+    >
+
+      <div class="field full">
+
+        <label for="cardType">
+          Choose card
+        </label>
+
+        <select
+          id="cardType"
+          name="cardType"
+          required
+        >
+
+          <option value="" disabled selected>
+            Select card type
+          </option>
+
+          <option value="credit-card">
+            Credit Card
+          </option>
+
+          <option value="debit-card">
+            Debit Card
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <button
+        type="submit"
+        class="primary-btn"
+      >
+        Submit Request
+      </button>
+
+    </form>
 
   </section>
 
@@ -156,6 +114,76 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 </script>
+
+
+<style>
+
+.no-card-card {
+  text-align: center;
+  padding: 45px 30px;
+}
+
+.no-card-icon {
+  width: 65px;
+  height: 65px;
+  margin: 0 auto 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #eef4f8;
+  color: #073b6b;
+
+  font-size: 28px;
+}
+
+.no-card-card .card-title {
+  margin-bottom: 10px;
+}
+
+.no-card-text {
+  margin: 0 auto 28px;
+  color: #666;
+  font-size: 14px;
+}
+
+.no-card-card form {
+  max-width: 420px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.no-card-card .field {
+  margin-bottom: 22px;
+}
+
+.no-card-card .field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.no-card-card select {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+
+  border: 1px solid #ccc;
+  border-radius: 4px;
+
+  background: #fff;
+  color: #333;
+
+  font-size: 15px;
+}
+
+.no-card-card .primary-btn {
+  width: 100%;
+}
+
+</style>
 
 </body>
 </html>
