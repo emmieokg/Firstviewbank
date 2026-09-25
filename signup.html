@@ -132,6 +132,32 @@
       color: #075b91;
       font-weight: bold;
     }
+    .password-input {
+  position: relative;
+}
+
+.password-input input {
+  padding-right: 45px !important;
+}
+
+.password-input button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: none;
+  background: transparent;
+
+  color: #666;
+  cursor: pointer;
+
+  font-size: 16px;
+}
+
+.password-input button:hover {
+  color: #073b6b;
+}
 
   </style>
 
@@ -231,31 +257,53 @@
 
 
         <label for="signupPassword">
-          Password:
-          <span class="required">*</span>
-        </label>
+  Password: <span class="required">*</span>
+</label>
 
-        <input
-          type="password"
-          id="signupPassword"
-          autocomplete="new-password"
-          minlength="8"
-          required
-        >
+<div class="password-input">
+
+  <input
+    type="password"
+    id="signupPassword"
+    autocomplete="new-password"
+    minlength="8"
+    required
+  >
+
+  <button
+    type="button"
+    onclick="togglePassword('signupPassword', this)"
+    aria-label="Show password"
+  >
+    <i class="fa-regular fa-eye"></i>
+  </button>
+
+</div>
 
 
-        <label for="confirmPassword">
-          Confirm Password:
-          <span class="required">*</span>
-        </label>
+<label for="confirmPassword">
+  Confirm Password: <span class="required">*</span>
+</label>
 
-        <input
-          type="password"
-          id="confirmPassword"
-          autocomplete="new-password"
-          minlength="8"
-          required
-        >
+<div class="password-input">
+
+  <input
+    type="password"
+    id="confirmPassword"
+    autocomplete="new-password"
+    minlength="8"
+    required
+  >
+
+  <button
+    type="button"
+    onclick="togglePassword('confirmPassword', this)"
+    aria-label="Show password"
+  >
+    <i class="fa-regular fa-eye"></i>
+  </button>
+
+</div>
 
 
         <button
@@ -292,6 +340,36 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script src="auth.js"></script>
+  <script>
+
+function togglePassword(inputId, button) {
+
+  const input = document.getElementById(inputId);
+  const icon = button.querySelector("i");
+
+  if (input.type === "password") {
+
+    input.type = "text";
+
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+
+    button.setAttribute("aria-label", "Hide password");
+
+  } else {
+
+    input.type = "password";
+
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+
+    button.setAttribute("aria-label", "Show password");
+
+  }
+
+}
+
+</script>
 
 </body>
 
