@@ -61,6 +61,19 @@
       gap: 22px;
     }
 
+   .dashboard-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.dashboard-welcome h1 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #073b6b;
+}
+
     .top-action {
   display: flex;
   align-items: center;
@@ -480,7 +493,7 @@
   ================================= -->
 
   <header class="dashboard-header">
-
+      <div class="dashboard-left">
      <a
     href="profile.html"
     class="header-profile"
@@ -488,6 +501,18 @@
   >
     <i class="fa-regular fa-user"></i>
   </a>
+
+      <div class="dashboard-welcome">
+
+      <h1>
+
+        Welcome, <span id="welcomeName">Customer</span>
+
+      </h1>
+
+    </div>
+
+  </div>
 
   <!-- RIGHT-SIDE ACTIONS -->
 
@@ -564,15 +589,6 @@
   ================================= -->
 
   <main class="dashboard">
-
-
-    <!-- WELCOME -->
-
-    <section class="welcome">
-
-      <h1>
-        Welcome, <span id="welcomeName">Customer</span>
-      </h1>
 
       <p>
         Here's an overview of your Firstviewbank accounts.
