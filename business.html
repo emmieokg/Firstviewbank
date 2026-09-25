@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Business Checking | Firstviewbank</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .business-page {
+      background:#f7f8f9;
+      min-height:calc(100vh - 120px);
+      padding:55px 20px 80px;
+    }
+
+    .business-card {
+      max-width:700px;
+      margin:0 auto;
+      background:#fff;
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(0,0,0,.08);
+    }
+
+    .business-image {
+      width:100%;
+      height:260px;
+      overflow:hidden;
+    }
+
+    .business-image img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .business-content {
+      padding:40px;
+    }
+
+    .business-content h1 {
+      color:#073b6b;
+      font-size:32px;
+      line-height:1.2;
+      margin:0 0 15px;
+    }
+
+    .business-content p {
+      color:#555;
+      font-size:16px;
+      line-height:1.6;
+      margin:0 0 25px;
+    }
+
+    .business-content label {
+      display:block;
+      color:#073b6b;
+      font-weight:600;
+      font-size:14px;
+      margin-bottom:8px;
+    }
+
+    .business-content select {
+      width:100%;
+      min-height:50px;
+      padding:0 14px;
+      border:1px solid #ccc;
+      border-radius:5px;
+      background:#fff;
+      color:#222;
+      font-size:15px;
+      cursor:pointer;
+    }
+
+    .business-content select:focus {
+      outline:none;
+      border-color:#073b6b;
+    }
+
+    .business-submit {
+      width:100%;
+      margin-top:25px;
+      padding:14px 20px;
+      background:#c82333;
+      color:#fff;
+      border:none;
+      border-radius:5px;
+      font-size:15px;
+      font-weight:bold;
+      cursor:pointer;
+    }
+
+    .business-submit:hover {
+      background:#b51e2c;
+    }
+
+    @media (max-width:600px) {
+      .business-page {
+        padding:30px 15px 60px;
+      }
+
+      .business-image {
+        height:200px;
+      }
+
+      .business-content {
+        padding:28px 22px;
+      }
+
+      .business-content h1 {
+        font-size:27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="business-page">
+
+    <div class="business-card">
+
+      <!-- IMAGE -->
+      <div class="business-image">
+        <img src="business.JPG" alt="Business checking">
+      </div>
+
+      <div class="business-content">
+
+        <h1>Open a new business checking account today.</h1>
+
+        <p>
+          Choose the annual revenue that fits your business, and we'll show you
+          ways we can help.
+        </p>
+
+        <form onsubmit="submitBusiness(event)">
+
+          <label for="revenue">Annual business revenue</label>
+
+          <select id="revenue" required>
+            <option value="" disabled selected>Select your annual revenue</option>
+            <option value="starting">I'm just starting out</option>
+            <option value="up-to-1m">Up to $1M</option>
+            <option value="1m-50m">$1M to $50M</option>
+            <option value="50m-2b">$50M to $2B</option>
+            <option value="more-than-2b">More than $2B</option>
+          </select>
+
+          <button type="submit" class="business-submit">
+            Submit
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function submitBusiness(event) {
+      event.preventDefault();
+
+      const revenue = document.getElementById("revenue").value;
+
+      if (!revenue) {
+        return;
+      }
+
+      alert("Thank you. Your selection has been submitted.");
+    }
+  </script>
+
+</body>
+</html>
