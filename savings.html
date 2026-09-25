@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <link
+  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Account | Firstviewbank</title>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="bank-pages.css">
+
+</head>
+
+
+</header>
+
+
+<main class="page-wrap">
+
+  <a href="dashboard.html" class="back-link">
+    <i class="fa-solid fa-arrow-left"></i>
+    Back to Dashboard
+  </a>
+
+
+  <p class="page-subtitle">
+    View savings account information and recent activity.
+  </p>
+
+
+  <section class="account-summary">
+
+    <div>
+
+      <small>
+        Available balance
+      </small>
+
+      <div class="account-balance">
+        $0.00
+      </div>
+    </div>
+
+
+    <a
+      href="deposit.html"
+      class="summary-action"
+    >
+      Deposit
+    </a>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2 class="card-title">
+      Account Details
+    </h2>
+
+
+    <div class="profile-grid">
+
+      <div class="info-box">
+
+        <span>
+          Account type
+        </span>
+
+        <strong id="accountType">
+          Savings
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Status
+        </span>
+
+        <strong>
+          Active
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Available balance
+        </span>
+
+        <strong>
+          $0.00
+        </strong>
+
+      </div>
+
+
+      <div class="info-box">
+
+        <span>
+          Recent activity
+        </span>
+
+        <strong>
+          No transactions yet
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="card">
+
+    <h2 class="card-title">
+      Recent Transactions
+    </h2>
+
+    <div class="empty">
+      No transactions to display.
+    </div>
+
+  </section>
+
+</main>
+
+
+<script>
+
+const params =
+  new URLSearchParams(window.location.search);
+
+const type =
+  (params.get("type") || "savings").toLowerCase();
+
+
+const names = {
+
+  checking: "Checking Account",
+
+  savings: "Savings Account",
+
+  investment: "Investment Account"
+
+};
+
+
+const types = {
+
+  checking: "Checking",
+
+  savings: "Savings",
+
+  investment: "Investment"
+
+};
+
+
+document.getElementById("accountTitle").textContent =
+  names[type] || names.savings;
+
+
+document.getElementById("accountType").textContent =
+  types[type] || types.savings;
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", async () => {
+
+  if (typeof requireAuth === "function") {
+    await requireAuth();
+  }
+
+});
+
+</script>
+
+</body>
+</html>
