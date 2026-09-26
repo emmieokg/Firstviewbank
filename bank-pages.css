@@ -266,15 +266,20 @@ textarea {
   font-weight: bold;
 }
 
+.summary-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .summary-action {
   background: #c82333;
   color: #fff;
-
+   display: inline-block;
+  text-decoration: none;
   border: 0;
   border-radius: 4px;
-
   padding: 11px 16px;
-
   font-weight: bold;
 }
 
