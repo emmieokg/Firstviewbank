@@ -174,7 +174,7 @@
         onclick="togglePassword('newPassword', this)"
         aria-label="Show password"
       >
-        <i class="fa-regular fa-eye"></i>
+        <i class="fa-regular fa-eye-slash"></i>
       </button>
 
     </div>
@@ -205,7 +205,7 @@
         onclick="togglePassword('confirmNewPassword', this)"
         aria-label="Show password"
       >
-        <i class="fa-regular fa-eye"></i>
+        <i class="fa-regular fa-eye-slash"></i>
       </button>
 
     </div>
@@ -443,8 +443,8 @@ function togglePassword(inputId, button) {
 
     input.type = "text";
 
-    icon.classList.remove("fa-eye");
-    icon.classList.add("fa-eye-slash");
+    icon.classList.add("fa-eye");
+    icon.classList.remove("fa-eye-slash");
 
     button.setAttribute(
       "aria-label",
@@ -455,8 +455,8 @@ function togglePassword(inputId, button) {
 
     input.type = "password";
 
-    icon.classList.remove("fa-eye-slash");
-    icon.classList.add("fa-eye");
+    icon.classList.add("fa-eye-slash");
+    icon.classList.remove("fa-eye");
 
     button.setAttribute(
       "aria-label",
