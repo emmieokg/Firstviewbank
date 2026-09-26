@@ -351,8 +351,8 @@ function togglePassword(inputId, button) {
 
     input.type = "text";
 
-    icon.classList.add("fa-eye-slash");
-    icon.classList.remove("fa-eye");
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
     
 
     button.setAttribute("aria-label", "Hide password");
@@ -362,8 +362,8 @@ function togglePassword(inputId, button) {
     input.type = "password";
 
     
-    icon.classList.add("fa-eye");
-    icon.classList.remove("fa-eye-slash");
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
 
     button.setAttribute("aria-label", "Show password");
 
