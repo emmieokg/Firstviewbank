@@ -19,10 +19,94 @@
 
   <link rel="stylesheet" href="bank-pages.css">
 
+  <style>
+
+    .transaction-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .transaction-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      border-bottom: 1px solid #e5e7eb;
+      gap: 15px;
+    }
+
+    .transaction-item:last-child {
+      border-bottom: none;
+    }
+
+    .transaction-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .transaction-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #eef4f9;
+      color: #073b6b;
+      flex-shrink: 0;
+    }
+
+    .transaction-name {
+      font-weight: 600;
+      color: #222;
+      text-transform: capitalize;
+    }
+
+    .transaction-account {
+      font-size: 13px;
+      color: #777;
+      margin-top: 3px;
+      text-transform: capitalize;
+    }
+
+    .transaction-right {
+      text-align: right;
+    }
+
+    .transaction-amount {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .deposit {
+      color: #16803c;
+    }
+
+    .withdrawal {
+      color: #c82333;
+    }
+
+    .transaction-date {
+      font-size: 12px;
+      color: #777;
+      margin-top: 4px;
+      white-space: nowrap;
+    }
+
+    .empty {
+      text-align: center;
+      padding: 30px 15px;
+      color: #777;
+    }
+
+  </style>
+
 </head>
 
-</header>
 
+<body>
 
 <main class="page-wrap">
 
@@ -39,13 +123,11 @@
 
   <section class="card">
 
-    <div class="empty">
+    <div id="transactionList" class="transaction-list">
 
-      No transactions yet.
-
-      <br>
-
-      Your completed activity will appear here.
+      <div class="empty">
+        Loading transactions...
+      </div>
 
     </div>
 
@@ -61,9 +143,163 @@
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-  if (typeof requireAuth === "function") {
-    await requireAuth();
+  if (typeof requireAuth !== "function") {
+    console.error("requireAuth() not found.");
+    return;
   }
+
+  const user = await requireAuth();
+
+  if (!user) return;
+
+
+  const transactionList =
+    document.getElementById("transactionList");
+
+
+  const { data, error } = await supabaseClient
+
+    .from("transactions")
+
+    .select("*")
+
+    .eq("user_id", user.id)
+
+    .order("created_at", {
+      ascending: false
+    });
+
+
+  if (error) {
+
+    console.error("Transaction error:", error);
+
+    transactionList.innerHTML = `
+      <div class="empty">
+        Unable to load transactions.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    transactionList.innerHTML = `
+      <div class="empty">
+
+        No transactions yet.
+
+        <br>
+
+        Your completed activity will appear here.
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  transactionList.innerHTML = "";
+
+
+  data.forEach(transaction => {
+
+    const isDeposit =
+      transaction.transaction_type === "deposit";
+
+    const amount =
+      Number(transaction.amount).toLocaleString(
+        "en-US",
+        {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        }
+      );
+
+
+    const date =
+      new Date(transaction.created_at).toLocaleString(
+        "en-US",
+        {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        }
+      );
+
+
+    const item = document.createElement("div");
+
+    item.className = "transaction-item";
+
+
+    item.innerHTML = `
+
+      <div class="transaction-left">
+
+        <div class="transaction-icon">
+
+          <i class="fa-solid ${
+            isDeposit
+              ? "fa-arrow-down"
+              : "fa-arrow-up"
+          }"></i>
+
+        </div>
+
+
+        <div>
+
+          <div class="transaction-name">
+
+            ${transaction.transaction_type}
+
+          </div>
+
+
+          <div class="transaction-account">
+
+            ${transaction.account_type} account
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="transaction-right">
+
+        <div class="transaction-amount ${
+          isDeposit
+            ? "deposit"
+            : "withdrawal"
+        }">
+
+          ${isDeposit ? "+" : "-"}$${amount}
+
+        </div>
+
+
+        <div class="transaction-date">
+
+          ${date}
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    transactionList.appendChild(item);
+
+  });
 
 });
 
