@@ -222,9 +222,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
           <div>
             <div class="transaction-name">
-              ${transaction.transaction_type}
-            </div>
-
+              ${transaction.status === "pending"
+             ? "Withdrawal Pending"
+             : transaction.transaction_type}
+              </div>
+  
             <div class="transaction-account">
               ${transaction.account_type} account
             </div>
