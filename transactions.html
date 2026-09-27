@@ -253,10 +253,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.error("Transactions:", error);
 
     list.innerHTML = `
-      <div class="empty">
-        Unable to load transactions.
-      </div>
-    `;
+  <div class="empty">
+    Error:<br><br>
+    ${error.message}
+  </div>
+`;
 
   }
 
