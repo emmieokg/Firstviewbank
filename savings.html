@@ -36,7 +36,7 @@
 
 
   <p class="page-subtitle">
-    View savings account information and recent activity.
+    View your savings account balance.
   </p>
 
 
@@ -69,164 +69,17 @@
   </a>
 
   </section>
-  
 
-<section class="card">
+<a href="transactions.html" class="transaction-history-button">
+  Check Transaction History
+</a>
 
-  <h2 class="card-title">
-    Recent Transactions
-  </h2>
-
-  <div id="recentTransactions">
-
-    <div class="empty">
-      Loading transactions...
-    </div>
-
-  </div>
-
-</section>
 
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
 <script src="balances.js"></script>
-
-
-<script>
-const params =
-  new URLSearchParams(window.location.search);
-
-const type =
-  (params.get("type") || "savings").toLowerCase();
-
-
-const names = {
-
-  checking: "Checking Account",
-
-  savings: "Savings Account",
-
-  investment: "Investment Account"
-
-};
-
-
-const types = {
-
-  checking: "Checking",
-
-  savings: "Savings",
-
-  investment: "Investment"
-
-};
-
-
-document.getElementById("accountTitle").textContent =
-  names[type] || names.savings;
-
-
-document.getElementById("accountType").textContent =
-  types[type] || types.savings;
-  
-const recentTransactions =
-  document.getElementById("recentTransactions");
-
-const user = await requireAuth();
-
-if (user) {
-
-  const { data, error } = await supabaseClient
-    .from("transactions")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("account_type", type)
-    .order("created_at", {
-      ascending: false
-    })
-    .limit(5);
-
-  if (error) {
-
-    console.error("Transaction error:", error);
-
-    recentTransactions.innerHTML = `
-      <div class="empty">
-        Unable to load transactions.
-      </div>
-    `;
-
-  } else if (!data || data.length === 0) {
-
-    recentTransactions.innerHTML = `
-      <div class="empty">
-        No transactions to display.
-      </div>
-    `;
-
-  } else {
-
-    recentTransactions.innerHTML = "";
-
-    data.forEach(transaction => {
-
-      const isDeposit =
-        transaction.transaction_type === "deposit";
-
-      const amount =
-        Number(transaction.amount).toLocaleString(
-          "en-US",
-          {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        );
-
-      const date =
-        new Date(transaction.created_at).toLocaleDateString(
-          "en-US",
-          {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-          }
-        );
-
-      recentTransactions.innerHTML += `
-
-        <div class="transaction-item">
-
-          <div>
-            <strong>
-              ${isDeposit ? "Deposit" : "Withdrawal"}
-            </strong>
-
-            <div class="transaction-date">
-              ${date}
-            </div>
-          </div>
-
-          <div class="${
-            isDeposit ? "deposit" : "withdrawal"
-          }">
-
-            ${isDeposit ? "+" : "-"}$${amount}
-
-          </div>
-
-        </div>
-
-      `;
-
-    });
-
-  }
-
-}
-
-</script>
 
 </body>
 </html>
