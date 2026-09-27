@@ -2,9 +2,12 @@
 <html lang="en">
 
 <head>
- <link
-  href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-  rel="stylesheet"
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
   <meta charset="UTF-8">
 
   <meta
@@ -23,9 +26,7 @@
 
 </head>
 
-
-</header>
-
+<body>
 
 <main class="page-wrap">
 
@@ -34,11 +35,9 @@
     Back to Dashboard
   </a>
 
-
   <p class="page-subtitle">
-    View checking account information and recent activity.
+    View checking account information.
   </p>
-
 
   <section class="account-summary">
 
@@ -51,41 +50,28 @@
       <div class="account-balance" id="checkingBalance">
         $0.00
       </div>
+
     </div>
 
+    <div class="summary-actions">
 
-     <div class="summary-actions">
-    <a
-      href="deposit.html"
-      class="summary-action"
-    >
-      Deposit
-    </a>
-    <a
-      href="withdraw.html"
-      class="summary-action"
-    >
-      Withdraw
-    </a>
-  </div>
+      <a
+        href="deposit.html"
+        class="summary-action"
+      >
+        Deposit
+      </a>
+
+      <a
+        href="withdraw.html"
+        class="summary-action"
+      >
+        Withdraw
+      </a>
+
+    </div>
 
   </section>
-
-<section class="card">
-
-  <h2 class="card-title">
-    Recent Transactions
-  </h2>
-
-  <div id="recentTransactions">
-
-    <div class="empty">
-      Loading transactions...
-    </div>
-
-  </div>
-
-</section>
 
 </main>
 
@@ -93,180 +79,6 @@
 <script src="auth.js"></script>
 <script src="balances.js"></script>
 
-<script>
-
-const transactionsSupabase =
-  window.supabase.createClient(
-    "https://qdtjuvtcairdskrppnaa.supabase.co",
-    "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ"
-  );
-
-
-const params =
-  new URLSearchParams(window.location.search);
-
-const type =
-  (params.get("type") || "checking").toLowerCase();
-
-
-const names = {
-
-  checking: "Checking Account",
-
-  savings: "Savings Account",
-
-  investment: "Investment Account"
-
-};
-
-
-const types = {
-
-  checking: "Checking",
-
-  savings: "Savings",
-
-  investment: "Investment"
-
-};
-
-
-document.getElementById("accountTitle").textContent =
-  names[type] || names.checking;
-
-
-document.getElementById("accountType").textContent =
-  types[type] || types.checking;
-
-
-const recentTransactions =
-  document.getElementById("recentTransactions");
-
-
-const {
-  data: { session },
-  error: sessionError
-} = await transactionsSupabase.auth.getSession();
-
-
-if (sessionError) {
-
-  console.error("Session error:", sessionError);
-
-  recentTransactions.innerHTML = `
-    <div class="empty">
-      Unable to load transactions.
-    </div>
-  `;
-
-} else if (!session) {
-
-  recentTransactions.innerHTML = `
-    <div class="empty">
-      Please log in again.
-    </div>
-  `;
-
-} else {
-
-  const { data, error } =
-    await transactionsSupabase
-      .from("transactions")
-      .select("*")
-      .eq("user_id", session.user.id)
-      .eq("account_type", type)
-      .order("created_at", {
-        ascending: false
-      })
-      .limit(5);
-
-
-  if (error) {
-
-    console.error("Transaction error:", error);
-
-    recentTransactions.innerHTML = `
-      <div class="empty">
-        Unable to load transactions.
-      </div>
-    `;
-
-  } else if (!data || data.length === 0) {
-
-    recentTransactions.innerHTML = `
-      <div class="empty">
-        No transactions to display.
-      </div>
-    `;
-
-  } else {
-
-    recentTransactions.innerHTML = "";
-
-
-    data.forEach(transaction => {
-
-      const isDeposit =
-        transaction.transaction_type === "deposit";
-
-
-      const amount =
-        Number(transaction.amount).toLocaleString(
-          "en-US",
-          {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }
-        );
-
-
-      const date =
-        new Date(transaction.created_at).toLocaleDateString(
-          "en-US",
-          {
-            month: "short",
-            day: "numeric",
-            year: "numeric"
-          }
-        );
-
-
-      recentTransactions.innerHTML += `
-
-        <div class="transaction-item">
-
-          <div>
-
-            <strong>
-              ${isDeposit ? "Deposit" : "Withdrawal"}
-            </strong>
-
-            <div class="transaction-date">
-              ${date}
-            </div>
-
-          </div>
-
-
-          <div class="${
-            isDeposit ? "deposit" : "withdrawal"
-          }">
-
-            ${isDeposit ? "+" : "-"}$${amount}
-
-          </div>
-
-        </div>
-
-      `;
-
-    });
-
-  }
-
-}
-
-</script>
-
 </body>
+
 </html>
