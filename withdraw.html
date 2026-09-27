@@ -35,11 +35,7 @@
       Withdrawal Details
     </h2>
 
-
-    <form onsubmit="
-      event.preventDefault();
-      alert('Withdrawals are not connected to a real banking provider yet.');
-    ">
+    <form id="withdrawForm">
 
      <div class="form-grid">
         <div class="field">
@@ -450,9 +446,89 @@ function filterBanks() {
 
 }
 
+document
+  .getElementById("withdrawForm")
+  .addEventListener("submit", async function (event) {
+
+    event.preventDefault();
+
+    const user = await requireAuth();
+
+    if (!user) return;
+
+    const accountSelect =
+      document.getElementById("withdrawAccount");
+
+    const accountType =
+      accountSelect.value
+        .toLowerCase()
+        .replace(" account", "");
+
+    const bankName =
+      document.getElementById("bankName").value.trim();
+
+    const routingNumber =
+      document.getElementById("routingNumber").value.trim();
+
+    const amount =
+      Number(document.getElementById("withdrawAmount").value);
+
+    if (!bankName) {
+      alert("Please select a bank.");
+      return;
+    }
+
+    if (!routingNumber) {
+      alert("Please enter the routing number.");
+      return;
+    }
+
+    if (!amount || amount <= 0) {
+      alert("Please enter a valid withdrawal amount.");
+      return;
+    }
+
+    const button =
+      document.querySelector(
+        '#withdrawForm button[type="submit"]'
+      );
+
+    button.disabled = true;
+    button.textContent = "Processing...";
+
+    const { error } =
+      await supabaseClient
+        .from("transactions")
+        .insert({
+          user_id: user.id,
+          account_type: accountType,
+          transaction_type: "withdrawal",
+          amount: amount,
+          status: "pending"
+        });
+
+    if (error) {
+
+      console.error(error);
+
+      alert(
+        "Unable to submit withdrawal: " +
+        error.message
+      );
+
+      button.disabled = false;
+      button.textContent = "Continue";
+
+      return;
+    }
+
+    alert("Withdrawal submitted and is pending.");
+
+    window.location.href = "transactions.html";
+
+  });
 
 </script>
-
 
 <style>
 
