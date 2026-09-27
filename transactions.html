@@ -170,9 +170,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     .order("created_at", {
       ascending: false
     });
-    console.log("USER ID:", user.id);
-console.log("TRANSACTIONS:", data);
-console.log("ERROR:", error);
+    transactionList.innerHTML = `
+  <div class="empty">
+    User ID: ${user.id}<br><br>
+    Transactions found: ${data ? data.length : 0}<br><br>
+    Error: ${error ? error.message : "None"}
+  </div>
+`;
 
 
   if (error) {
