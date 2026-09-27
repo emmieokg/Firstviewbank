@@ -89,6 +89,10 @@
 
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="auth.js"></script>
+<script src="balances.js"></script>
+
 
 <script>
 
@@ -224,23 +228,5 @@ if (user) {
 
 }
 </script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="auth.js"></script>
-<script src="balances.js"></script>
-
-<script>
-
-document.addEventListener("DOMContentLoaded", async () => {
-
-  if (typeof requireAuth === "function") {
-    await requireAuth();
-  }
-
-});
-
-</script>
-
 </body>
 </html>
