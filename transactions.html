@@ -140,26 +140,43 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/auth.js"></script>
+
 <script>
 document.body.insertAdjacentHTML(
   "afterbegin",
-  "<div id='testResult' style='padding:20px;background:white;color:red;position:relative;z-index:9999'>Testing...</div>"
+  "<div id='testResult' style='padding:20px;background:white;color:red;position:relative;z-index:9999'>Starting test...</div>"
 );
 
 (async () => {
 
   const result = document.getElementById("testResult");
 
-  const {
-    data: { user },
-    error
-  } = await supabaseClient.auth.getUser();
+  result.innerHTML = "Supabase client loaded...";
 
-  result.innerHTML = `
-    Supabase test<br><br>
-    User: ${user ? user.id : "NO USER"}<br><br>
-    Error: ${error ? error.message : "NONE"}
-  `;
+  try {
+
+    const {
+      data: { user },
+      error
+    } = await supabaseClient.auth.getUser();
+
+    if (error) {
+      result.innerHTML =
+        "Supabase error: " + error.message;
+      return;
+    }
+
+    result.innerHTML =
+      "Supabase connected.<br><br>" +
+      "User ID: " +
+      (user ? user.id : "NO USER");
+
+  } catch (err) {
+
+    result.innerHTML =
+      "JavaScript error: " + err.message;
+
+  }
 
 })();
 </script>
