@@ -91,6 +91,44 @@
 
 
 <script>
+
+const params =
+  new URLSearchParams(window.location.search);
+
+const type =
+  (params.get("type") || "checking").toLowerCase();
+
+
+const names = {
+
+  checking: "Checking Account",
+
+  savings: "Savings Account",
+
+  investment: "Investment Account"
+
+};
+
+
+const types = {
+
+  checking: "Checking",
+
+  savings: "Savings",
+
+  investment: "Investment"
+
+};
+
+
+document.getElementById("accountTitle").textContent =
+  names[type] || names.checking;
+
+
+document.getElementById("accountType").textContent =
+  types[type] || types.checking;
+
+
 const recentTransactions =
   document.getElementById("recentTransactions");
 
@@ -185,43 +223,6 @@ if (user) {
   }
 
 }
-
-const params =
-  new URLSearchParams(window.location.search);
-
-const type =
-  (params.get("type") || "checking").toLowerCase();
-
-
-const names = {
-
-  checking: "Checking Account",
-
-  savings: "Savings Account",
-
-  investment: "Investment Account"
-
-};
-
-
-const types = {
-
-  checking: "Checking",
-
-  savings: "Savings",
-
-  investment: "Investment"
-
-};
-
-
-document.getElementById("accountTitle").textContent =
-  names[type] || names.checking;
-
-
-document.getElementById("accountType").textContent =
-  types[type] || types.checking;
-
 </script>
 
 
