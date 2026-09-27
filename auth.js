@@ -5,7 +5,7 @@ const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ";
 
 
-const supabaseClient =
+window.supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
@@ -98,7 +98,7 @@ async function signUpUser() {
   try {
 
     const { data, error } =
-      await supabaseClient.auth.signUp({
+      await window.supabaseClient.auth.signUp({
 
         email: email,
 
@@ -187,7 +187,7 @@ async function signInUser() {
 
 
   const { data, error } =
-    await supabaseClient.auth.signInWithPassword({
+    await window.supabaseClient.auth.signInWithPassword({
 
       email: email,
 
@@ -240,7 +240,7 @@ async function requireAuth() {
   const {
     data: { user }
   } =
-    await supabaseClient.auth.getUser();
+    await window.supabaseClient.auth.getUser();
 
 
   if (!user) {
@@ -263,7 +263,7 @@ async function requireAuth() {
 async function logoutUser() {
 
   const { error } =
-    await supabaseClient.auth.signOut();
+    await window.supabaseClient.auth.signOut();
 
 
   if (error) {
