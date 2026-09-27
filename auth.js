@@ -114,7 +114,7 @@ async function signUpUser() {
           },
 
           emailRedirectTo:
-            window.location.origin + "email-verified.html"
+            window.location.origin + "/email-verified.html"
 
         }
 
@@ -152,7 +152,7 @@ window.location.href =
       error.message ||
       "Unable to create account.";
 }
-
+}
 
 // ==========================================
 // SIGN IN
