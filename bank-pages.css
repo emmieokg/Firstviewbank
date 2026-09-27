@@ -219,6 +219,12 @@ textarea {
   gap: 12px;
   margin-top: 22px;
 }
+.transaction-history-button {
+  display: inline-block;
+  margin-top: 16px;
+  text-decoration: none;
+  font-weight: 600;
+}
 
 /* NOTICE */
 
