@@ -161,7 +161,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("transactionList");
 
 
-  const { data, error } = await supabaseClient
+  const { data, error } = await window.supabaseClient
   .from("transactions")
   .select("id, user_id, account_type, transaction_type, amount, created_at")
   .eq("user_id", user.id);
