@@ -148,18 +148,32 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("transactionList");
 
   transactionList.innerHTML =
-    '<div class="empty">Step 1: Script loaded</div>';
+    '<div class="empty">Checking session...</div>';
 
-  const user = await requireAuth();
+  const {
+    data: { user },
+    error
+  } = await window.supabaseClient.auth.getUser();
 
-  transactionList.innerHTML =
-    '<div class="empty">Step 2: Auth finished</div>';
+  if (error) {
+    transactionList.innerHTML = `
+      <div class="empty">
+        Auth error:<br><br>
+        ${error.message}
+      </div>
+    `;
+    return;
+  }
 
-  if (!user) return;
+  if (!user) {
+    transactionList.innerHTML =
+      '<div class="empty">No logged-in user.</div>';
+    return;
+  }
 
   transactionList.innerHTML = `
     <div class="empty">
-      Step 3: User found<br><br>
+      User found:<br><br>
       ${user.id}
     </div>
   `;
