@@ -245,17 +245,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         <div class="transaction-right">
 
-          <div class="transaction-amount ${
-            isDeposit ? "deposit" : "withdrawal"
-          }">
-            ${isDeposit ? "+" : "-"}$${amount}
-          </div>
+  <div class="transaction-status">
+    ${transaction.status}
+  </div>
 
-          <div class="transaction-date">
-            ${date}
-          </div>
+  <div class="transaction-amount ${
+    isDeposit ? "deposit" : "withdrawal"
+  }">
+    ${isDeposit ? "+" : "-"}$${amount}
+  </div>
 
-        </div>
+  <div class="transaction-date">
+    ${date}
+  </div>
+
+</div>
 
       </div>
     `;
