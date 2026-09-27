@@ -93,8 +93,14 @@
 <script src="auth.js"></script>
 <script src="balances.js"></script>
 
-
 <script>
+
+const transactionsSupabase =
+  window.supabase.createClient(
+    "https://qdtjuvtcairdskrppnaa.supabase.co",
+    "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ"
+  );
+
 
 const params =
   new URLSearchParams(window.location.search);
@@ -136,19 +142,44 @@ document.getElementById("accountType").textContent =
 const recentTransactions =
   document.getElementById("recentTransactions");
 
-const user = await requireAuth();
 
-if (user) {
+const {
+  data: { session },
+  error: sessionError
+} = await transactionsSupabase.auth.getSession();
 
-  const { data, error } = await supabaseClient
-    .from("transactions")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("account_type", type)
-    .order("created_at", {
-      ascending: false
-    })
-    .limit(5);
+
+if (sessionError) {
+
+  console.error("Session error:", sessionError);
+
+  recentTransactions.innerHTML = `
+    <div class="empty">
+      Unable to load transactions.
+    </div>
+  `;
+
+} else if (!session) {
+
+  recentTransactions.innerHTML = `
+    <div class="empty">
+      Please log in again.
+    </div>
+  `;
+
+} else {
+
+  const { data, error } =
+    await transactionsSupabase
+      .from("transactions")
+      .select("*")
+      .eq("user_id", session.user.id)
+      .eq("account_type", type)
+      .order("created_at", {
+        ascending: false
+      })
+      .limit(5);
+
 
   if (error) {
 
@@ -172,10 +203,12 @@ if (user) {
 
     recentTransactions.innerHTML = "";
 
+
     data.forEach(transaction => {
 
       const isDeposit =
         transaction.transaction_type === "deposit";
+
 
       const amount =
         Number(transaction.amount).toLocaleString(
@@ -185,6 +218,7 @@ if (user) {
             maximumFractionDigits: 2
           }
         );
+
 
       const date =
         new Date(transaction.created_at).toLocaleDateString(
@@ -196,11 +230,13 @@ if (user) {
           }
         );
 
+
       recentTransactions.innerHTML += `
 
         <div class="transaction-item">
 
           <div>
+
             <strong>
               ${isDeposit ? "Deposit" : "Withdrawal"}
             </strong>
@@ -208,7 +244,9 @@ if (user) {
             <div class="transaction-date">
               ${date}
             </div>
+
           </div>
+
 
           <div class="${
             isDeposit ? "deposit" : "withdrawal"
@@ -227,6 +265,8 @@ if (user) {
   }
 
 }
+
 </script>
+
 </body>
 </html>
