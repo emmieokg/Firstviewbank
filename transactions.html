@@ -141,51 +141,31 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/auth.js"></script>
 
-
-
 <script>
 
 document.addEventListener("DOMContentLoaded", async () => {
 
-  if (typeof requireAuth !== "function") {
-    console.error("requireAuth() not found.");
-    return;
-  }
-
-  const user = await requireAuth();
-  if (!user) return;
-document.getElementById("transactionList").innerHTML = `
-  <div class="empty">
-    Logged-in UID:<br>
-    ${user.id}
-  </div>
-`;
-
   const transactionList =
     document.getElementById("transactionList");
 
-const { data, error } = await window.supabaseClient
+  const user = await requireAuth();
 
-  .from("transactions")
+  if (!user) {
+    transactionList.innerHTML = `
+      <div class="empty">
+        No logged-in user.
+      </div>
+    `;
+    return;
+  }
 
-  .select("*");
-
-transactionList.innerHTML = `
-
-  <div class="empty">
-
-    Rows found: ${data ? data.length : 0}<br><br>
-
-    Error: ${error ? error.message : "None"}
-
-  </div>
-
-`;
-  
-
+  const { data, error } = await window.supabaseClient
+    .from("transactions")
+    .select("*")
+    .eq("user_id", user.id)
+    .order("created_at", { ascending: false });
 
   if (error) {
-
     console.error("Transaction error:", error);
 
     transactionList.innerHTML = `
@@ -197,27 +177,19 @@ transactionList.innerHTML = `
     return;
   }
 
-
   if (!data || data.length === 0) {
-
     transactionList.innerHTML = `
       <div class="empty">
-
         No transactions yet.
-
         <br>
-
         Your completed activity will appear here.
-
       </div>
     `;
 
     return;
   }
 
-
   transactionList.innerHTML = "";
-
 
   data.forEach(transaction => {
 
@@ -233,7 +205,6 @@ transactionList.innerHTML = `
         }
       );
 
-
     const date =
       new Date(transaction.created_at).toLocaleString(
         "en-US",
@@ -246,11 +217,9 @@ transactionList.innerHTML = `
         }
       );
 
-
     const item = document.createElement("div");
 
     item.className = "transaction-item";
-
 
     item.innerHTML = `
 
@@ -266,26 +235,19 @@ transactionList.innerHTML = `
 
         </div>
 
-
         <div>
 
           <div class="transaction-name">
-
             ${transaction.transaction_type}
-
           </div>
 
-
           <div class="transaction-account">
-
             ${transaction.account_type} account
-
           </div>
 
         </div>
 
       </div>
-
 
       <div class="transaction-right">
 
@@ -299,17 +261,13 @@ transactionList.innerHTML = `
 
         </div>
 
-
         <div class="transaction-date">
-
           ${date}
-
         </div>
 
       </div>
 
     `;
-
 
     transactionList.appendChild(item);
 
