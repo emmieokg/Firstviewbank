@@ -160,15 +160,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const transactionList =
     document.getElementById("transactionList");
 
+const { data, error } = await window.supabaseClient
 
-  const { data, error } =
-  await window.supabaseClient
-    .from("transactions")
-    .select("*")
-    .eq("user_id", user.id)
-    .order("created_at", {
-      ascending: false
-    });
+  .from("transactions")
+
+  .select("*");
+
+transactionList.innerHTML = `
+
+  <div class="empty">
+
+    Rows found: ${data ? data.length : 0}<br><br>
+
+    Error: ${error ? error.message : "None"}
+
+  </div>
+
+`;
+  
 
 
   if (error) {
