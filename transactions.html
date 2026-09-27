@@ -153,9 +153,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   const user = await requireAuth();
-
   if (!user) return;
-
+document.getElementById("transactionList").innerHTML = `
+  <div class="empty">
+    Logged-in UID:<br>
+    ${user.id}
+  </div>
+`;
 
   const transactionList =
     document.getElementById("transactionList");
