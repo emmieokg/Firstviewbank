@@ -170,6 +170,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     .order("created_at", {
       ascending: false
     });
+    console.log("USER ID:", user.id);
+console.log("TRANSACTIONS:", data);
+console.log("ERROR:", error);
 
 
   if (error) {
