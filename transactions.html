@@ -147,112 +147,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   const transactionList =
     document.getElementById("transactionList");
 
+  transactionList.innerHTML =
+    '<div class="empty">Step 1: Script loaded</div>';
+
   const user = await requireAuth();
+
+  transactionList.innerHTML =
+    '<div class="empty">Step 2: Auth finished</div>';
 
   if (!user) return;
 
-  const { data, error } =
-    await window.supabaseClient
-      .from("transactions")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error(error);
-
-    transactionList.innerHTML = `
-      <div class="empty">
-        Unable to load transactions.
-      </div>
-    `;
-
-    return;
-  }
-
-  if (!data || data.length === 0) {
-    transactionList.innerHTML = `
-      <div class="empty">
-        No transactions yet.
-        <br>
-        Your completed activity will appear here.
-      </div>
-    `;
-
-    return;
-  }
-
-  transactionList.innerHTML = "";
-
-  data.forEach(transaction => {
-
-    const isDeposit =
-      transaction.transaction_type === "deposit";
-
-    const amount =
-      Number(transaction.amount).toLocaleString("en-US", {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2
-      });
-
-    const date =
-      new Date(transaction.created_at).toLocaleString("en-US", {
-        month: "short",
-        day: "numeric",
-        year: "numeric",
-        hour: "numeric",
-        minute: "2-digit"
-      });
-
-    const item = document.createElement("div");
-
-    item.className = "transaction-item";
-
-    item.innerHTML = `
-      <div class="transaction-left">
-
-        <div class="transaction-icon">
-          <i class="fa-solid ${
-            isDeposit
-              ? "fa-arrow-down"
-              : "fa-arrow-up"
-          }"></i>
-        </div>
-
-        <div>
-          <div class="transaction-name">
-            ${transaction.transaction_type}
-          </div>
-
-          <div class="transaction-account">
-            ${transaction.account_type} account
-          </div>
-        </div>
-
-      </div>
-
-      <div class="transaction-right">
-
-        <div class="transaction-amount ${
-          isDeposit
-            ? "deposit"
-            : "withdrawal"
-        }">
-          ${isDeposit ? "+" : "-"}$${amount}
-        </div>
-
-        <div class="transaction-date">
-          ${date}
-        </div>
-
-      </div>
-    `;
-
-    transactionList.appendChild(item);
-  });
+  transactionList.innerHTML = `
+    <div class="empty">
+      Step 3: User found<br><br>
+      ${user.id}
+    </div>
+  `;
 
 });
-
 </script>
 
 </body>
