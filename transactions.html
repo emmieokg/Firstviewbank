@@ -160,21 +160,21 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
   const { data, error } = await supabaseClient
+  .from("transactions")
+  .select("id, user_id, account_type, transaction_type, amount, created_at")
+  .eq("user_id", user.id);
 
-    .from("transactions")
-
-    .select("*")
-
-    .eq("user_id", user.id)
-
-    .order("created_at", {
-      ascending: false
-    });
-    transactionList.innerHTML = `
+transactionList.innerHTML = `
   <div class="empty">
-    User ID: ${user.id}<br><br>
-    Transactions found: ${data ? data.length : 0}<br><br>
-    Error: ${error ? error.message : "None"}
+    Logged-in UID:<br>
+    ${user.id}
+    <br><br>
+
+    Rows returned:<br>
+    ${data ? data.length : "null"}
+    <br><br>
+
+    ${error ? error.message : "No error"}
   </div>
 `;
 
