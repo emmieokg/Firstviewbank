@@ -144,40 +144,121 @@
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
 
-  const transactionList =
-    document.getElementById("transactionList");
+  const list = document.getElementById("transactionList");
 
-  const {
-    data: { session },
-    error
-  } = await window.supabaseClient.auth.getSession();
+  try {
 
-  if (error) {
-    transactionList.innerHTML = `
+    const { data: sessionData, error: sessionError } =
+      await window.supabaseClient.auth.getSession();
+
+    if (sessionError) {
+      throw sessionError;
+    }
+
+    const session = sessionData.session;
+
+    if (!session) {
+      list.innerHTML =
+        '<div class="empty">Please log in again.</div>';
+      return;
+    }
+
+    const userId = session.user.id;
+
+    const { data, error } =
+      await window.supabaseClient
+        .from("transactions")
+        .select("*")
+        .eq("user_id", userId)
+        .order("created_at", { ascending: false });
+
+    if (error) {
+      throw error;
+    }
+
+    if (!data || data.length === 0) {
+      list.innerHTML =
+        '<div class="empty">No transactions yet.</div>';
+      return;
+    }
+
+    list.innerHTML = "";
+
+    data.forEach(transaction => {
+
+      const isDeposit =
+        transaction.transaction_type === "deposit";
+
+      const amount =
+        Number(transaction.amount).toLocaleString("en-US", {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        });
+
+      const date =
+        new Date(transaction.created_at).toLocaleString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+          hour: "numeric",
+          minute: "2-digit"
+        });
+
+      list.innerHTML += `
+        <div class="transaction-item">
+
+          <div class="transaction-left">
+
+            <div class="transaction-icon">
+              <i class="fa-solid ${
+                isDeposit
+                  ? "fa-arrow-down"
+                  : "fa-arrow-up"
+              }"></i>
+            </div>
+
+            <div>
+              <div class="transaction-name">
+                ${transaction.transaction_type}
+              </div>
+
+              <div class="transaction-account">
+                ${transaction.account_type} account
+              </div>
+            </div>
+
+          </div>
+
+          <div class="transaction-right">
+
+            <div class="transaction-amount ${
+              isDeposit ? "deposit" : "withdrawal"
+            }">
+              ${isDeposit ? "+" : "-"}$${amount}
+            </div>
+
+            <div class="transaction-date">
+              ${date}
+            </div>
+
+          </div>
+
+        </div>
+      `;
+
+    });
+
+  } catch (error) {
+
+    console.error("Transactions:", error);
+
+    list.innerHTML = `
       <div class="empty">
-        ${error.message}
+        Unable to load transactions.
       </div>
     `;
-    return;
+
   }
-
-  if (!session) {
-    transactionList.innerHTML = `
-      <div class="empty">
-        No active session.
-      </div>
-    `;
-    return;
-  }
-
-  const user = session.user;
-
-  transactionList.innerHTML = `
-    <div class="empty">
-      User found:<br><br>
-      ${user.id}
-    </div>
-  `;
 
 });
 </script>
