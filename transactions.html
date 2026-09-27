@@ -139,136 +139,120 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/auth.js"></script>
 
 <script>
-if (typeof supabaseClient !== "undefined") {
-  window.supabaseClient = supabaseClient;
-}
-</script>
+const transactionsSupabase =
+  window.supabase.createClient(
+    "https://qdtjuvtcairdskrppnaa.supabase.co",
+    "sb_publishable_4gCpAyujXlfZ0rsdHkzVzg_VxqpC0qQ"
+  );
 
-<script>
 document.addEventListener("DOMContentLoaded", async () => {
 
   const list = document.getElementById("transactionList");
 
-  try {
+  const {
+    data: { session },
+    error: sessionError
+  } = await transactionsSupabase.auth.getSession();
 
-    const { data: sessionData, error: sessionError } =
-      await window.supabaseClient.auth.getSession();
+  if (sessionError) {
+    list.innerHTML =
+      `<div class="empty">Error: ${sessionError.message}</div>`;
+    return;
+  }
 
-    if (sessionError) {
-      throw sessionError;
-    }
+  if (!session) {
+    list.innerHTML =
+      '<div class="empty">Please log in again.</div>';
+    return;
+  }
 
-    const session = sessionData.session;
+  const { data, error } =
+    await transactionsSupabase
+      .from("transactions")
+      .select("*")
+      .eq("user_id", session.user.id)
+      .order("created_at", { ascending: false });
 
-    if (!session) {
-      list.innerHTML =
-        '<div class="empty">Please log in again.</div>';
-      return;
-    }
+  if (error) {
+    list.innerHTML =
+      `<div class="empty">Error: ${error.message}</div>`;
+    return;
+  }
 
-    const userId = session.user.id;
+  if (!data || data.length === 0) {
+    list.innerHTML =
+      '<div class="empty">No transactions yet.</div>';
+    return;
+  }
 
-    const { data, error } =
-      await window.supabaseClient
-        .from("transactions")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
+  list.innerHTML = "";
 
-    if (error) {
-      throw error;
-    }
+  data.forEach(transaction => {
 
-    if (!data || data.length === 0) {
-      list.innerHTML =
-        '<div class="empty">No transactions yet.</div>';
-      return;
-    }
+    const isDeposit =
+      transaction.transaction_type === "deposit";
 
-    list.innerHTML = "";
+    const amount =
+      Number(transaction.amount).toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
 
-    data.forEach(transaction => {
+    const date =
+      new Date(transaction.created_at).toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit"
+      });
 
-      const isDeposit =
-        transaction.transaction_type === "deposit";
+    list.innerHTML += `
+      <div class="transaction-item">
 
-      const amount =
-        Number(transaction.amount).toLocaleString("en-US", {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        });
+        <div class="transaction-left">
 
-      const date =
-        new Date(transaction.created_at).toLocaleString("en-US", {
-          month: "short",
-          day: "numeric",
-          year: "numeric",
-          hour: "numeric",
-          minute: "2-digit"
-        });
-
-      list.innerHTML += `
-        <div class="transaction-item">
-
-          <div class="transaction-left">
-
-            <div class="transaction-icon">
-              <i class="fa-solid ${
-                isDeposit
-                  ? "fa-arrow-down"
-                  : "fa-arrow-up"
-              }"></i>
-            </div>
-
-            <div>
-              <div class="transaction-name">
-                ${transaction.transaction_type}
-              </div>
-
-              <div class="transaction-account">
-                ${transaction.account_type} account
-              </div>
-            </div>
-
+          <div class="transaction-icon">
+            <i class="fa-solid ${
+              isDeposit ? "fa-arrow-down" : "fa-arrow-up"
+            }"></i>
           </div>
 
-          <div class="transaction-right">
-
-            <div class="transaction-amount ${
-              isDeposit ? "deposit" : "withdrawal"
-            }">
-              ${isDeposit ? "+" : "-"}$${amount}
+          <div>
+            <div class="transaction-name">
+              ${transaction.transaction_type}
             </div>
 
-            <div class="transaction-date">
-              ${date}
+            <div class="transaction-account">
+              ${transaction.account_type} account
             </div>
-
           </div>
 
         </div>
-      `;
 
-    });
+        <div class="transaction-right">
 
-  } catch (error) {
+          <div class="transaction-amount ${
+            isDeposit ? "deposit" : "withdrawal"
+          }">
+            ${isDeposit ? "+" : "-"}$${amount}
+          </div>
 
-    console.error("Transactions:", error);
+          <div class="transaction-date">
+            ${date}
+          </div>
 
-    list.innerHTML = `
-  <div class="empty">
-    Error:<br><br>
-    ${error.message}
-  </div>
-`;
+        </div>
 
-  }
+      </div>
+    `;
+  });
 
 });
 </script>
+ 
 
 </body>
 </html>
